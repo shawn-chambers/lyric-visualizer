@@ -1,10 +1,10 @@
 const express = require('express');
 const router = express.Router();
 
-const { getWordsByYear } = require('../controllers/lyricsControllers');
+const { getWordsByQuery } = require('../controllers/lyricsControllers');
 
 router
-  .route('/:year')
-  .get(getWordsByYear);
+  .route('/')
+  .get(getWordsByQuery);
 
 module.exports = router;
