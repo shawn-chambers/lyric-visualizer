@@ -7,6 +7,9 @@ module.exports = {
     filename: 'bundle.js',
     path: path.resolve(__dirname, 'public')
   },
+  // plugins: [
+  //   "@babel/plugin-transform-runtime"
+  // ],
   module: {
     rules: [
       {
