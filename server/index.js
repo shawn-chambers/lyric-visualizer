@@ -6,6 +6,7 @@ const lyricsRouter = require('./routes/lyricsRoutes.js');
 const songsRouter = require('./routes/songsRoutes.js');
 
 app.use(morgan('dev'));
+app.use(express.static('public'));
 
 app.use('/api/lyrics', lyricsRouter);
 app.use('/api/songs', songsRouter);
