@@ -1,15 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import Data from './components/Data';
+import SearchBar from './components/SearchBar';
+import ChartWrapper from './components/ChartWrapper';
 import { AppContextProvidor } from './context/AppContext';
 
 const App = () => {
   return (
     <>
       <AppContextProvidor>
-        <h1>Hello</h1>
-        <Data/>
+        <SearchBar/>
+        <ChartWrapper/>
       </AppContextProvidor>
     </>
   )
