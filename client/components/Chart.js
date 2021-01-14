@@ -1,6 +1,5 @@
 // import React, { useContext, useEffect } from 'react';
 import * as d3 from 'd3';
-import 'd3-selection-multi';
 
 class Chart {
   constructor(element, wordData) {
