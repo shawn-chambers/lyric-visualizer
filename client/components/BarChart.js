@@ -27,47 +27,33 @@ const BarChart = () => {
     const [chart, setChart] = useState();
 
     useEffect(() => {
-        draw(makeSongsByYear(wordData));
-    }, [wordData])
-
-    useEffect(() => {
         if (chartRef.current) {
-            if (chart) chart.destroy();
+            if (chart) chart.destroy()
             setChart(
-                draw(makeSongsByYear(wordData))
+                new Chart(chartRef.current.getContext('2d'), {
+                    type: 'bar',
+                    data: {
+                        labels: makeYears(1970, 2020),
+                        datasets: [{
+                            label: 'Song Data',
+                            data: makeYears(1970, 2020).map(year => filterDataByYear(year, makeSongsByYear(wordData)))
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        scales: {
+                            y: {
+                                beginAtZero: true
+                            }
+                        }
+                    }
+                })
             )
         }
-    }, [chartRef, wordData, chart])
-
-    const draw = (data) => {
-        console.log('data', data);
-        console.log('formatted data', makeYears(1970, 2020).map((year) => filterDataByYear(year, data)));
-
-        const labels = makeYears(1970, 2020);
-        let songData = {
-            labels: labels,
-            datasets: [{
-                label: 'Song Data',
-                data: makeYears(1970, 2020).map(year => filterDataByYear(year, data))
-            }]
-        }
-        const myRef = chartRef.current.getContext('2d');
-        new Chart(myRef, {
-            type: 'bar',
-            data: songData,
-            options: {
-                responsive: true,
-                scales: {
-                    y: {
-                        beginAtZero: true
-                    }
-                }
-            }
-        })
-    }
+    }, [chartRef, wordData])
 
     return (
-        <div className='chart-container'>
+        <div className='chart-container' >
             <canvas className='chart' ref={chartRef} />
         </div>
     )
