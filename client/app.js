@@ -1,18 +1,19 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import ReactDOM from 'react-dom';
 
 import SearchBar from './components/SearchBar';
 import BarChart from './components/BarChart';
-import { AppContextProvidor } from './context/AppContext';
+import { AppContextProvider } from './context/AppContext';
+import Dashboard from './components/Dashboard';
 
 const App = () => {
+
   return (
-    <>
-      <AppContextProvidor>
-        <SearchBar />
-        <BarChart />
-      </AppContextProvidor>
-    </>
+    <AppContextProvider>
+      <SearchBar />
+      <Dashboard />
+      <BarChart />
+    </AppContextProvider>
   )
 }
 

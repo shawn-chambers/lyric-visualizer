@@ -16,17 +16,15 @@ const SearchBar = (props) => {
   }, [word])
 
   return (
-    <>
-      <form>
-        <input
-          value={term}
-          onKeyDown={handleKeyPress}
-          onChange={(e) => setTerm(e.target.value)}
-        >
-        </input>
-        <button onClick={(e) => { e.preventDefault(); setWord(term) }}>Query</button>
-      </form>
-    </>
+    <form>
+      <input
+        value={term}
+        onKeyDown={handleKeyPress}
+        onChange={(e) => setTerm(e.target.value)}
+      >
+      </input>
+      <button onClick={(e) => { e.preventDefault(); setWord(term) }}>Query</button>
+    </form>
   )
 }
 

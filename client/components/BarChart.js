@@ -1,73 +1,74 @@
-import * as d3 from 'd3';
-import React, { useRef, useEffect, useContext } from 'react';
+import React, { useRef, useEffect, useContext, useState } from 'react';
+import Chart from "chart.js";
 import { AppContext } from '../context/AppContext';
 
+const makeYears = (start, end) => {
+    let years = [];
+    for (var i = start; i <= end; i++) {
+        years.push(`${i}`);
+    }
+    return years
+}
+
+const filterDataByYear = (year, data) => {
+    let thisData = 0;
+    for (let j = 0; j < data.length; j++) {
+        if (data[j].year === year) {
+            thisData = data[j].count
+            break;
+        }
+    }
+    return thisData
+}
+
 const BarChart = () => {
-    const { wordData } = useContext(AppContext);
-
-    const ref = useRef();
+    const { wordData, makeSongsByYear } = useContext(AppContext);
+    const chartRef = useRef(null);
+    const [chart, setChart] = useState();
 
     useEffect(() => {
-        const svg = d3.select(ref.current)
-            .attr('width', 500)
-            .attr('height', 300)
+        draw(makeSongsByYear(wordData));
     }, [wordData])
 
     useEffect(() => {
-        draw(wordData);
-    }, [wordData])
-
+        if (chartRef.current) {
+            if (chart) chart.destroy();
+            setChart(
+                draw(makeSongsByYear(wordData))
+            )
+        }
+    }, [chartRef, wordData, chart])
 
     const draw = (data) => {
-        const svg = d3.select(ref.current);
+        console.log('data', data);
+        console.log('formatted data', makeYears(1970, 2020).map((year) => filterDataByYear(year, data)));
 
-        const margin = {
-            top: 20,
-            right: 20,
-            bottom: 80,
-            left: 80
-          }
-      
-          const w = 500 - margin.right - margin.left;
-          const h = 300 - margin.top - margin.bottom;
-      
-          let g = svg.append('g')
-            .attr('transform', `translate(${margin.left}, ${margin.top})`);
-      
-          // scales
-          let xScale = d3.scaleLinear()
-            .domain([0, 50])
-            .range([0, w]);
-          let yScale = d3.scaleLinear()
-            .domain([0, 300])
-            .range([h, 0]);
-      
-          // axes
-          let xAxis = d3.axisBottom(xScale)
-            .tickValues([0, 10, 20, 30, 40, 50])
-            .tickFormat(d => 1970 + d)
-          g.append('g')
-            .attr('class', 'x-axis')
-            .attr('transform', `translate(0, ${h})`)
-            .call(xAxis);
-      
-          let yAxis = d3.axisLeft(yScale)
-            .tickFormat(d => +d);
-          g.append('g')
-            .attr('class', 'y-axis')
-            .call(yAxis);
-      
-          const rects = svg.selectAll('rect')
-            .data(data);
-      
-          rects.enter().append('rect')
-            .attr('x', d => {console.log('d', d)})
+        const labels = makeYears(1970, 2020);
+        let songData = {
+            labels: labels,
+            datasets: [{
+                label: 'Song Data',
+                data: makeYears(1970, 2020).map(year => filterDataByYear(year, data))
+            }]
+        }
+        const myRef = chartRef.current.getContext('2d');
+        new Chart(myRef, {
+            type: 'bar',
+            data: songData,
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        })
     }
 
-    return(
-        <div className='chart'>
-            <svg ref={ref}>
-            </svg>
+    return (
+        <div className='chart-container'>
+            <canvas className='chart' ref={chartRef} />
         </div>
     )
 }
