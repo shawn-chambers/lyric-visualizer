@@ -11,8 +11,8 @@ const App = () => {
   return (
     <AppContextProvider>
       <SearchBar />
-      <Dashboard />
       <BarChart />
+      <Dashboard />
     </AppContextProvider>
   )
 }

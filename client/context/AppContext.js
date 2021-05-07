@@ -6,6 +6,7 @@ export const AppContext = createContext();
 export const AppContextProvider = (props) => {
   const [word, setWord] = useState('');
   const [wordData, setWordData] = useState([]);
+  const [songs, setSongs] = useState([]);
 
   const fetchSongsByWord = (query) => {
     if (query.length > 0) {
@@ -45,7 +46,9 @@ export const AppContextProvider = (props) => {
         wordData,
         word,
         setWord,
-        makeSongsByYear
+        makeSongsByYear,
+        songs,
+        setSongs
       }}
     >
       {props.children}

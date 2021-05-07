@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { AppContext } from '../context/AppContext';
 
 const Dashboard = () => {
-  const { wordData, word } = useContext(AppContext);
+  const { wordData, word, songs } = useContext(AppContext);
 
   // useState('')
 
@@ -16,6 +16,13 @@ const Dashboard = () => {
         word.length ?
           <div>There were {wordData.length} songs that used {word}!</div> : null
       }
+      <ul>
+        {songs.map((song, i) => {
+          return (
+            <li>{song.title} by {song.artist} at position: {song.position}</li>
+          )
+        })}
+      </ul>
     </>
   )
 
