@@ -10,7 +10,7 @@ html {
 
 body {
   box-sizing: border-box;
-  background-color: cornflowerblue;
+  background-color: #c9cbce;
   padding: 3rem; }
 
 .chart-container {
@@ -19,3 +19,6 @@ body {
   max-width: 70%;
   display: flex;
   justify-content: center; }
+
+.song {
+  margin: 2rem 0; }
