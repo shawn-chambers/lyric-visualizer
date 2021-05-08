@@ -3,7 +3,7 @@ import { AppContext } from '../context/AppContext';
 import Song from './song';
 
 const Dashboard = () => {
-  const { wordData, word, songs } = useContext(AppContext);
+  const { wordData, word, songs, fetchLyricsById } = useContext(AppContext);
 
   return (
     <>
@@ -13,7 +13,7 @@ const Dashboard = () => {
       }
       {songs.map((song, i) => {
         return (
-          <Song song={song} key={`${song.title}`}/>
+          <Song song={song} key={`${song.title}`} getLyrics={fetchLyricsById}/>
         )
       })}
     </>

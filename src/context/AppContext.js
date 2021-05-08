@@ -20,6 +20,18 @@ export const AppContextProvider = (props) => {
     }
   };
 
+  const fetchLyricsById = (id) => {
+    if (id) {
+      axios.get(`http://localhost:3030/api/lyrics/${id}`)
+        .then(lyrics => {
+          console.log(lyrics);
+        })
+        .catch(err => {
+          console.error('Error fetching lyrics:', err);
+        })
+    }
+  }
+
   const makeSongsByYear = (data) => {
     let dataByYear = data.reduce((acc, song) => {
       if (!acc[song['year']]) {
@@ -43,6 +55,7 @@ export const AppContextProvider = (props) => {
     <AppContext.Provider
       value={{
         fetchSongsByWord,
+        fetchLyricsById,
         wordData,
         word,
         setWord,
