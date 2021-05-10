@@ -1,6 +1,7 @@
 import React, { useRef, useEffect, useContext, useState } from 'react';
 import Chart from "chart.js";
 import { AppContext } from '../context/AppContext';
+import { makeSongsByYear } from "../utils";
 
 const makeYears = (start, end) => {
     let years = [];
@@ -23,19 +24,19 @@ const filterDataByYear = (year, data) => {
 
 
 const BarChart = () => {
-    const { wordData, makeSongsByYear, songs, setSongs } = useContext(AppContext);
+    const { wordData, setSongs, setLyrics } = useContext(AppContext);
     const chartRef = useRef(null);
     const [chart, setChart] = useState();
 
     const handleBarChartClick = (e, item) => {
         if (item.length) { 
-            console.log('item', item[0]._index); 
             let year = 1970 + item[0]._index;
             let selected = wordData.filter((song) => {
                 return song.year === year
             })
 
-            setSongs(selected)
+            setSongs(selected);
+            setLyrics('');
         }
     }
 

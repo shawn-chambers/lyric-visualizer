@@ -1,4 +1,5 @@
 import React, { useState, createContext } from 'react';
+import { formatLyrics } from '../utils';
 import axios from 'axios';
 
 export const AppContext = createContext();
@@ -7,6 +8,7 @@ export const AppContextProvider = (props) => {
   const [word, setWord] = useState('');
   const [wordData, setWordData] = useState([]);
   const [songs, setSongs] = useState([]);
+  const [lyrics, setLyrics] = useState('');
 
   const fetchSongsByWord = (query) => {
     if (query.length > 0) {
@@ -23,33 +25,16 @@ export const AppContextProvider = (props) => {
   const fetchLyricsById = (id) => {
     if (id) {
       axios.get(`http://localhost:3030/api/lyrics/${id}`)
-        .then(lyrics => {
-          console.log(lyrics);
+        .then(({data}) => {
+          let lyrics = data.rows[0].lyrics;
+          let html = formatLyrics(lyrics);
+          setLyrics(html);
         })
         .catch(err => {
           console.error('Error fetching lyrics:', err);
         })
     }
   }
-
-  const makeSongsByYear = (data) => {
-    let dataByYear = data.reduce((acc, song) => {
-      if (!acc[song['year']]) {
-        acc[song['year']] = 1;
-      } else {
-        acc[song['year']]++;
-      }
-      return acc;
-    }, {});
-
-    let dataArr = [];
-
-    for (let year in dataByYear) {
-      dataArr.push({ year: year, count: dataByYear[year] });
-    }
-    return dataArr;
-  }
-
 
   return (
     <AppContext.Provider
@@ -59,9 +44,10 @@ export const AppContextProvider = (props) => {
         wordData,
         word,
         setWord,
-        makeSongsByYear,
         songs,
-        setSongs
+        setSongs,
+        lyrics,
+        setLyrics
       }}
     >
       {props.children}

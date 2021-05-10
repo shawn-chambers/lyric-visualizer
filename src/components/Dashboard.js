@@ -1,9 +1,11 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { AppContext } from '../context/AppContext';
-import Song from './song';
+import Song from './Song';
 
 const Dashboard = () => {
-  const { wordData, word, songs, fetchLyricsById } = useContext(AppContext);
+  const { wordData, word, songs, fetchLyricsById, lyrics } = useContext(AppContext);
+
+  const [showLyrics, setShowLyrics] = useState({ songNum: null })
 
   return (
     <>
@@ -13,7 +15,15 @@ const Dashboard = () => {
       }
       {songs.map((song, i) => {
         return (
-          <Song song={song} key={`${song.title}`} getLyrics={fetchLyricsById}/>
+          <Song 
+            key={`${song.title}-${i}`}
+            song={song}
+            getLyrics={fetchLyricsById}
+            lyrics={lyrics}
+            handleDisplay={setShowLyrics}
+            displayNum={showLyrics}
+            songNum={i}
+          />
         )
       })}
     </>

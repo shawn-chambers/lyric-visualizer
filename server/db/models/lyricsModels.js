@@ -32,7 +32,6 @@ module.exports.getLyrics = {
     const text = `select lyrics from songs_copy where id=${id}`;
     try {
       const lyrics = await db.query(text);
-      console.log('lyrics in byId', lyrics);
       return lyrics;
     } catch (err) {
       throw ( `error getting lyrics for song of id: ${id}`, err.stack);
