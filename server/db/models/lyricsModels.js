@@ -22,11 +22,19 @@ module.exports.getLyrics = {
   byRange: async (start, end) => {
     const text = `select * from ts_stat('select tokens from songs_copy where position>=${start} and position<=${end}') order by nentry desc;`;
     try {
-      console.log('here');
       const words = await db.query(text);
       return words;
     } catch (err) {
       throw ('error geting lyrics by range of positions', err.stack);
+    }
+  },
+  byId: async (id) => {
+    const text = `select lyrics from songs_copy where id=${id}`;
+    try {
+      const lyrics = await db.query(text);
+      return lyrics;
+    } catch (err) {
+      throw ( `error getting lyrics for song of id: ${id}`, err.stack);
     }
   }
 }

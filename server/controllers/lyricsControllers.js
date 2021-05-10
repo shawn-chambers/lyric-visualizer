@@ -33,3 +33,14 @@ module.exports.getSongsByWord = async (req, res) => {
     res.status(404).send(err);
   }
 }
+
+module.exports.getLyricsFromId = async (req, res) => {
+  try {
+    const id = req.params.id;
+    const result = await getLyrics.byId(id);
+
+    res.status(200).send(result);
+  } catch (err) {
+    res.status(404).send(err)
+  }
+}
