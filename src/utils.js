@@ -1,5 +1,10 @@
-export const formatLyrics = (lyrics) => {
-  return lyrics.split('\n').join('<br>');
+export const formatLyrics = (lyrics, keyWord) => {
+  let str = lyrics.split('\n').join('<br>');
+  const regEx1 = new RegExp(keyWord, 'g');
+  str = str.replace(regEx1, '<b>'+ keyWord + '</b>')
+  keyWord = keyWord.charAt(0).toUpperCase() + keyWord.slice(1)
+  const regEx2 = new RegExp(keyWord, 'g');
+  return str.replace(regEx2, '<b>'+ keyWord + '</b>');
 }
 
 export const reduceSongsByYear = (data) => {
