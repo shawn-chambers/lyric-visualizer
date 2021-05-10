@@ -11,7 +11,8 @@ html {
 body {
   box-sizing: border-box;
   background-color: #c9cbce;
-  padding: 3rem; }
+  padding: 3rem;
+  font-family: sans-serif; }
 
 .chart-container {
   background-color: white;
