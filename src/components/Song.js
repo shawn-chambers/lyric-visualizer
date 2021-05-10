@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from "react";
 import Lyrics from "./Lyrics";
 
-const Song = ({ 
+const Song = ({
   song,
   getLyrics,
   handleDisplay,
   displayNum,
   songNum,
-  lyrics
+  lyrics,
+  setSongId
 }) => {
   const [displayLyrics, setDisplayLyrics] = useState(false);
 
@@ -16,9 +17,10 @@ const Song = ({
   }, [lyrics])
 
   const handleClick = (id, num) => {
+    setSongId(id);
     getLyrics(id);
-    setDisplayLyrics(!displayLyrics)
-    handleDisplay({ songNum: num, display: displayLyrics });
+    setDisplayLyrics(!displayLyrics);
+    handleDisplay(num);
   }
 
   const toggleLyrics = () => {
@@ -32,7 +34,12 @@ const Song = ({
         <div className="song__artist">{song.artist}</div>
         <div className="song__position">{`${song.position}`}</div>
       </div >
-      {lyrics.length > 0 && displayNum.songNum === songNum && displayLyrics && <Lyrics toggle={toggleLyrics}/>}
+      {
+        lyrics.length > 0
+        && displayNum === songNum
+        && displayLyrics
+        && <Lyrics toggle={toggleLyrics} />
+      }
     </>
   )
 }

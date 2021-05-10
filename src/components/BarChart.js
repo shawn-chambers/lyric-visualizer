@@ -1,7 +1,7 @@
 import React, { useRef, useEffect, useContext, useState } from 'react';
 import Chart from "chart.js";
 import { AppContext } from '../context/AppContext';
-import { makeSongsByYear } from "../utils";
+import { reduceSongsByYear, filterDataByYear } from "../utils";
 
 const makeYears = (start, end) => {
     let years = [];
@@ -11,16 +11,6 @@ const makeYears = (start, end) => {
     return years
 }
 
-const filterDataByYear = (year, data) => {
-    let thisData = 0;
-    for (let j = 0; j < data.length; j++) {
-        if (data[j].year === year) {
-            thisData = data[j].count
-            break;
-        }
-    }
-    return thisData
-}
 
 
 const BarChart = () => {
@@ -50,12 +40,15 @@ const BarChart = () => {
                         labels: makeYears(1970, 2020),
                         datasets: [{
                             label: 'Song Data',
-                            data: makeYears(1970, 2020).map(year => filterDataByYear(year, makeSongsByYear(wordData)))
+                            data: makeYears(1970, 2020).map(year => filterDataByYear(year, reduceSongsByYear(wordData)))
                         }]
                     },
                     options: {
                         responsive: true,
                         scales: {
+                            pointLabels: {
+                                fontStyle: "italic"
+                            },
                             y: {
                                 beginAtZero: true
                             }

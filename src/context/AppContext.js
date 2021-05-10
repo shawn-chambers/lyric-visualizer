@@ -1,4 +1,4 @@
-import React, { useState, createContext } from 'react';
+import React, { useState, createContext, useMemo } from 'react';
 import { formatLyrics } from '../utils';
 import axios from 'axios';
 
@@ -9,6 +9,7 @@ export const AppContextProvider = (props) => {
   const [wordData, setWordData] = useState([]);
   const [songs, setSongs] = useState([]);
   const [lyrics, setLyrics] = useState('');
+  const [songId, setSongId] = useState(null);
 
   const fetchSongsByWord = (query) => {
     if (query.length > 0) {
@@ -23,11 +24,11 @@ export const AppContextProvider = (props) => {
   };
 
   const fetchLyricsById = (id) => {
-    if (id) {
+    if (id !== songId) {
       axios.get(`http://localhost:3030/api/lyrics/${id}`)
-        .then(({data}) => {
-          let lyrics = data.rows[0].lyrics;
-          let html = formatLyrics(lyrics);
+        .then(({ data }) => {
+          const lyrics = data.rows[0].lyrics;
+          const html = formatLyrics(lyrics);
           setLyrics(html);
         })
         .catch(err => {
@@ -47,7 +48,8 @@ export const AppContextProvider = (props) => {
         songs,
         setSongs,
         lyrics,
-        setLyrics
+        setLyrics,
+        setSongId
       }}
     >
       {props.children}

@@ -3,15 +3,15 @@ import { AppContext } from '../context/AppContext';
 import Song from './Song';
 
 const Dashboard = () => {
-  const { wordData, word, songs, fetchLyricsById, lyrics } = useContext(AppContext);
+  const { wordData, word, songs, fetchLyricsById, lyrics, setSongId } = useContext(AppContext);
 
-  const [showLyrics, setShowLyrics] = useState({ songNum: null })
+  const [showLyrics, setShowLyrics] = useState(null)
 
   return (
     <>
       {
         word.length ?
-          <div>There were {wordData.length} songs that used {word}!</div> : null
+          <div>{wordData.length} songs that used {word}.</div> : null
       }
       {songs.map((song, i) => {
         return (
@@ -23,6 +23,7 @@ const Dashboard = () => {
             handleDisplay={setShowLyrics}
             displayNum={showLyrics}
             songNum={i}
+            setSongId={setSongId}
           />
         )
       })}
