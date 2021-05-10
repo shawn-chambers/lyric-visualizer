@@ -1,4 +1,4 @@
-import React, { useState, createContext, useMemo } from 'react';
+import React, { useState, createContext } from 'react';
 import { formatLyrics } from '../utils';
 import axios from 'axios';
 
@@ -28,7 +28,7 @@ export const AppContextProvider = (props) => {
       axios.get(`http://localhost:3030/api/lyrics/${id}`)
         .then(({ data }) => {
           const lyrics = data.rows[0].lyrics;
-          const html = formatLyrics(lyrics);
+          const html = formatLyrics(lyrics, word);
           setLyrics(html);
         })
         .catch(err => {

@@ -12,7 +12,7 @@ body {
   box-sizing: border-box;
   background-color: #c9cbce;
   padding: 3rem;
-  font-family: sans-serif; }
+  font-family: 'Raleway', sans-serif; }
 
 .chart-container {
   background-color: white;
@@ -20,6 +20,15 @@ body {
   max-width: 70%;
   display: flex;
   justify-content: center; }
+
+.details {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700; }
+
+.lyrics {
+  font-family: "Montserrat", sans-serif; }
+  .lyrics b {
+    font-weight: 700; }
 
 .song {
   margin: 2rem 0; }

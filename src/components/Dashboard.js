@@ -1,5 +1,7 @@
 import React, { useContext, useState } from 'react';
 import { AppContext } from '../context/AppContext';
+import SearchBar from './SearchBar';
+import BarChart from './BarChart';
 import Song from './Song';
 
 const Dashboard = () => {
@@ -9,13 +11,15 @@ const Dashboard = () => {
 
   return (
     <>
+      <SearchBar />
+      <BarChart />
       {
         word.length ?
-          <div>{wordData.length} songs that used {word}.</div> : null
+          <div className="details">{wordData.length} songs that used {word}.</div> : null
       }
       {songs.map((song, i) => {
         return (
-          <Song 
+          <Song
             key={`${song.title}-${i}`}
             song={song}
             getLyrics={fetchLyricsById}

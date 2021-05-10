@@ -11,15 +11,13 @@ const makeYears = (start, end) => {
     return years
 }
 
-
-
 const BarChart = () => {
     const { wordData, setSongs, setLyrics } = useContext(AppContext);
     const chartRef = useRef(null);
     const [chart, setChart] = useState();
 
     const handleBarChartClick = (e, item) => {
-        if (item.length) { 
+        if (item.length) {
             let year = 1970 + item[0]._index;
             let selected = wordData.filter((song) => {
                 return song.year === year
@@ -40,17 +38,23 @@ const BarChart = () => {
                         labels: makeYears(1970, 2020),
                         datasets: [{
                             label: 'Song Data',
-                            data: makeYears(1970, 2020).map(year => filterDataByYear(year, reduceSongsByYear(wordData)))
+                            data: makeYears(1970, 2020).map(year => filterDataByYear(year, reduceSongsByYear(wordData))),
+                            borderColor: 'steelblue',
                         }]
                     },
                     options: {
+                        plugins: {
+                            tooltip: {
+                                enable: false
+                            }
+                        },
                         responsive: true,
                         scales: {
-                            pointLabels: {
-                                fontStyle: "italic"
-                            },
                             y: {
-                                beginAtZero: true
+                                beginAtZero: true,
+                                ticks: {
+                                    stepSize: 1
+                                }
                             }
                         },
                         onClick: handleBarChartClick

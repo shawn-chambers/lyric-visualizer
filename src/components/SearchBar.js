@@ -21,9 +21,10 @@ const SearchBar = (props) => {
         value={term}
         onKeyDown={handleKeyPress}
         onChange={(e) => setTerm(e.target.value)}
+        placeholder="enter a word"
       >
       </input>
-      <button onClick={(e) => { e.preventDefault(); setWord(term) }}>Query</button>
+      <button onClick={(e) => { e.preventDefault(); setWord(term) }}>Search</button>
     </form>
   )
 }
