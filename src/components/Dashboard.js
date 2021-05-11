@@ -3,6 +3,8 @@ import { AppContext } from '../context/AppContext';
 import SearchBar from './SearchBar';
 import BarChart from './BarChart';
 import Song from './Song';
+import D3Chart from './D3Chart';
+import { reduceSongsByYear } from '../utils';
 
 const Dashboard = () => {
   const { wordData, word, songs, fetchLyricsById, lyrics, setSongId } = useContext(AppContext);
@@ -12,7 +14,8 @@ const Dashboard = () => {
   return (
     <>
       <SearchBar />
-      <BarChart />
+      {/* <BarChart /> */}
+      <D3Chart />
       {
         word.length ?
           <div className="details">{wordData.length} songs that used {word}.</div> : null
