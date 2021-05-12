@@ -4,22 +4,41 @@ import { AppContext } from '../context/AppContext';
 import { useD3 } from '../hooks/useD3';
 import { reduceSongsByYear, filterDataByYear } from "../utils";
 
+const makeYears = (start, end) => {
+  let years = [];
+  for (var i = start; i <= end; i++) {
+    years.push(`${i}`);
+  }
+  return years
+}
+
 const D3Chart = () => {
   const { wordData, setSongs, setLyrics } = useContext(AppContext);
 
-  let data = reduceSongsByYear(wordData);
+  const handleBarChartClick = (e) => {
+    let year = Number(e.target.__data__.year);
+    let selected = wordData.filter((song) => {
+      return song.year === year
+    })
+    console.log(selected)
+    setSongs(selected);
+    setLyrics('');
 
-  console.log('data in chart', data);
+  }
+
+  let data = reduceSongsByYear(wordData);
 
   const ref = useD3(
     (svg) => {
       const height = 500;
-      const width = 500;
+      const width = 800;
       const margin = { top: 20, right: 30, bottom: 30, left: 40 };
+
 
       const x = d3
         .scaleBand()
         .domain(data.map((d) => d.year))
+        .range([1970, 2020])
         .rangeRound([margin.left, width - margin.right])
         .padding(0.1);
 
@@ -42,14 +61,14 @@ const D3Chart = () => {
 
       const y1Axis = (g) =>
         g
-          .attr("transform", `translate(${margin.left},0)`)
-          .style("color", "steelblue")
+          .attr("transform", `translate(${margin.left}, 0)`)
+          .style("color", "black")
           .call(d3.axisLeft(y1).ticks(null, "s"))
           .call((g) => g.select(".domain").remove())
           .call((g) =>
             g
               .append("text")
-              .attr("x", -margin.left)
+              .attr("x", - margin.left)
               .attr("y", 10)
               .attr("fill", "currentColor")
               .attr("text-anchor", "start")
@@ -70,8 +89,16 @@ const D3Chart = () => {
         .attr("width", x.bandwidth())
         .attr("y", (d) => y1(d.count))
         .attr("height", (d) => y1(0) - y1(d.count));
+
+      let rects = svg.selectAll('rect');
+
+      rects.on("click", (e) => {
+        handleBarChartClick(e)
+      })
+
+
     },
-    [data.length]
+    [data, wordData]
   );
 
 
