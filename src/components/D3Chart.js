@@ -37,7 +37,7 @@ const D3Chart = () => {
 
       const x = d3
         .scaleBand()
-        .domain(data.map((d) => d.year))
+        .domain(makeYears(1970, 2020))
         .range([1970, 2020])
         .rangeRound([margin.left, width - margin.right])
         .padding(0.1);
@@ -54,7 +54,6 @@ const D3Chart = () => {
             .tickValues(
               d3
                 .ticks(...d3.extent(x.domain()), width / 40)
-                .filter((v) => x(v) !== undefined)
             )
             .tickSizeOuter(0)
         );
@@ -91,6 +90,12 @@ const D3Chart = () => {
         .attr("height", (d) => y1(0) - y1(d.count));
 
       let rects = svg.selectAll('rect');
+
+      rects
+        .transition()
+        .duration(800)
+        .attr("y", function (d) { return y1(d.count); })
+        .attr("height", (d) => y1(0) - y1(d.count))
 
       rects.on("click", (e) => {
         handleBarChartClick(e)
