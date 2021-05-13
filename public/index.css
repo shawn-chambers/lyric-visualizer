@@ -11,15 +11,62 @@ html {
 body {
   box-sizing: border-box;
   background-color: #c9cbce;
-  padding: 3rem;
+  padding: 0 0 3rem 0;
   font-family: 'Raleway', sans-serif; }
+
+.billboard {
+  height: 90vh;
+  background-size: cover;
+  background-blend-mode: saturation;
+  background-position: center center;
+  background-repeat: no-repeat;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; }
+  .billboard__backdrop {
+    width: 100vw;
+    height: auto; }
+  .billboard__text {
+    padding: 1.5rem 1rem;
+    position: relative;
+    color: white;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center; }
+    .billboard__text--header {
+      font-family: "Quattrocento", serif;
+      font-size: 20rem;
+      text-shadow: 8px 7px 1px black; }
+      .billboard__text--header .mark {
+        color: white; }
+        .billboard__text--header .mark::before {
+          content: ".";
+          position: absolute;
+          font-size: 103%;
+          margin-left: 1.19rem;
+          line-height: 1.07;
+          color: #48c3d0; }
+    .billboard__text--sub-header {
+      font-size: 4.5rem;
+      max-width: 75%;
+      font-weight: 700;
+      text-shadow: 3px 3px 1px black; }
 
 .chart-container {
   background-color: white;
   padding: 2rem;
-  max-width: 70%;
+  max-width: 100%;
   display: flex;
-  justify-content: center; }
+  justify-content: center;
+  transition: all 2s ease; }
+  .chart-container .plot-area {
+    transition: all 2s ease; }
+  .chart-container svg {
+    transition: all 2s ease;
+    fill: #48c3d0; }
+  .chart-container .bar {
+    transition: all 2s ease; }
 
 .details {
   font-family: 'Montserrat', sans-serif;

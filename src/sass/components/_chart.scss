@@ -1,11 +1,20 @@
 .chart-container {
   background-color: white;
   padding: 2rem;
-  max-width: 70%;
+  max-width: 100%;
   display: flex;
   justify-content: center;
+  transition: all 2s ease;
+  
+  .plot-area {
+    transition: all 2s ease;
+  }
+  svg {
+    transition: all 2s ease;
+    fill: $color-tertiary;
+  }
 
   .bar {
-    transition: all 0.2s ease;
+    transition: all 2s ease;
   }
 }

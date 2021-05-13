@@ -79,7 +79,7 @@ const D3Chart = () => {
 
       svg
         .select(".plot-area")
-        .attr("fill", "steelblue")
+        // .attr("fill", "steelblue")
         .selectAll(".bar")
         .data(data)
         .join("rect")
@@ -108,19 +108,21 @@ const D3Chart = () => {
 
 
   return (
-    <svg
-      ref={ref}
-      style={{
-        height: 500,
-        width: "100%",
-        marginRight: "0px",
-        marginLeft: "0px",
-      }}
-    >
-      <g className="plot-area" />
-      <g className="x-axis" />
-      <g className="y-axis" />
-    </svg>
+    <div className="chart-container">
+      <svg
+        ref={ref}
+        style={{
+          height: 500,
+          width: "100%",
+          marginRight: "0px",
+          marginLeft: "0px",
+        }}
+      >
+        <g className="plot-area" />
+        <g className="x-axis" />
+        <g className="y-axis" />
+      </svg>
+    </div>
   )
 }
 
