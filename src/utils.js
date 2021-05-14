@@ -1,3 +1,11 @@
+export const makeYears = (start, end) => {
+  let years = [];
+  for (var i = start; i <= end; i++) {
+    years.push(`${i}`);
+  }
+  return years
+}
+
 export const formatLyrics = (lyrics, keyWord) => {
   let str = lyrics.split('\n').join('<br>');
   const regEx1 = new RegExp(keyWord, 'g');
@@ -8,6 +16,7 @@ export const formatLyrics = (lyrics, keyWord) => {
 }
 
 export const reduceSongsByYear = (data) => {
+  let years = makeYears(1970, 2020);
   let dataByYear = data.reduce((acc, song) => {
     if (!acc[song['year']]) {
       acc[song['year']] = 1;
@@ -19,8 +28,9 @@ export const reduceSongsByYear = (data) => {
 
   let dataArr = [];
 
-  for (let year in dataByYear) {
-    dataArr.push({ year: year, count: dataByYear[year] });
+  for (let i = 0; i < years.length; i ++) {
+    let count = dataByYear[years[i]] || 0;
+    dataArr.push({ year: years[i], count });
   }
   return dataArr;
 }
