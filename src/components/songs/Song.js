@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Lyrics from "./Lyrics";
+import Lyrics from "../Lyrics";
 
 const Song = ({
   song,
