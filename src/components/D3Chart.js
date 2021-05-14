@@ -2,29 +2,8 @@ import React, { useContext } from 'react';
 import * as d3 from 'd3';
 import { AppContext } from '../context/AppContext';
 import { useD3 } from '../hooks/useD3';
-import { reduceSongsByYear, filterDataByYear, makeYears } from "../utils";
+import { reduceSongsByYear, leastSquares, makeYears } from "../utils";
 
-function leastSquares(xSeries, ySeries) {
-  var reduceSumFunc = function (prev, cur) { return prev + cur; };
-
-  var xBar = xSeries.reduce(reduceSumFunc) * 1.0 / xSeries.length;
-  var yBar = ySeries.reduce(reduceSumFunc) * 1.0 / ySeries.length;
-
-  var ssXX = xSeries.map(function (d) { return Math.pow(d - xBar, 2); })
-    .reduce(reduceSumFunc);
-
-  var ssYY = ySeries.map(function (d) { return Math.pow(d - yBar, 2); })
-    .reduce(reduceSumFunc);
-
-  var ssXY = xSeries.map(function (d, i) { return (d - xBar) * (ySeries[i] - yBar); })
-    .reduce(reduceSumFunc);
-
-  var slope = ssXY / ssXX;
-  var intercept = yBar - (xBar * slope);
-  var rSquare = Math.pow(ssXY, 2) / (ssXX * ssYY);
-
-  return [slope, intercept, rSquare];
-}
 
 const D3Chart = () => {
   const { wordData, setSongs, setLyrics } = useContext(AppContext);
@@ -104,24 +83,55 @@ const D3Chart = () => {
       let rects = svg.selectAll('rect');
 
       rects
+        .data(data)
+        .enter().append('rect')
         .transition()
         .duration(800)
-        .attr("y", function (d) { return y1(d.count); })
+        .attr("y", (d) => y1(d.count))
         .attr("height", (d) => y1(0) - y1(d.count))
 
-      rects.on("click", (e) => {
-        handleBarChartClick(e)
-      })
-
       if (wordData.length) {
-        // get the x and y values for least squares
+        let tip = d3.select('body').append('div')
+          .attr('class', 'tool-tip')
+          .style('opacity', 0);
+
+        tip.destroy = () => {
+          tip.style('opacity', 0)
+            .style('visibility', 'hidden')
+          setTimeout(() => {
+            tip.remove();
+          }, 1000)
+        }
+
+        rects.on('mouseover', (e) => {
+          tip.transition()
+            .duration(200)
+            .style('opacity', 1);
+          tip.html(
+            `year: ${e.target.__data__.year}
+            songs: ${e.target.__data__.count}`
+          )
+            .style('left', e.pageX + 20 + 'px')
+            .style('top', (e.pageY - 45) + 'px')
+        });
+
+        rects.on('mouseout', (e) => {
+          tip.transition()
+            .duration(500)
+            .style('opacity', 0);
+        });
+
+        rects.on("click", (e) => {
+          handleBarChartClick(e);
+          tip.destroy();
+        })
+
         const xLabels = makeYears(1970, 2020);
         var xSeries = d3.range(1, xLabels.length + 1);
         var ySeries = data.map((d) => d.count);
 
         var leastSquaresCoeff = leastSquares(xSeries, ySeries);
 
-        // apply the reults of the least squares regression
         var xA = xLabels[0];
         var yA = leastSquaresCoeff[0] + leastSquaresCoeff[1];
         var xB = xLabels[xLabels.length - 1];
@@ -134,9 +144,9 @@ const D3Chart = () => {
         trendline.enter()
           .append("line")
           .attr("class", "trendline")
-          .attr("x1", (d) => x(d[0]))
+          .attr("x1", (d) => x(d[0]) + 5)
           .attr("y1", (d) => y1(d[1]))
-          .attr("x2", (d) => x(d[2]))
+          .attr("x2", (d) => x(d[2]) + 5)
           .attr("y2", (d) => y1(d[3]))
           .attr("stroke", "black")
           .attr("stroke-width", 1);
@@ -144,12 +154,11 @@ const D3Chart = () => {
         trendline
           .transition()
           .duration(1000)
-          .attr("x1", (d) => x(d[0]))
+          .attr("x1", (d) => x(d[0]) + 5)
           .attr("y1", (d) => y1(d[1]))
-          .attr("x2", (d) => x(d[2]))
+          .attr("x2", (d) => x(d[2]) + 5)
           .attr("y2", (d) => y1(d[3]))
       }
-
     },
     [data, wordData]
   );

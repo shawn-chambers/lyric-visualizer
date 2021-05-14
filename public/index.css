@@ -56,8 +56,10 @@ body {
 .chart-container {
   background-color: white;
   padding: 2rem;
-  max-width: 100%;
+  max-width: 840px;
   display: flex;
+  margin: auto;
+  border-radius: 4px;
   justify-content: center;
   transition: all 2s ease; }
   .chart-container .plot-area {
@@ -66,7 +68,24 @@ body {
     transition: all 2s ease;
     fill: #48c3d0; }
   .chart-container .bar {
-    transition: all 2s ease; }
+    transition: y 2s ease, fill 0.8s ease, height 2s ease; }
+    .chart-container .bar:hover {
+      fill: #127c88; }
+
+.tool-tip {
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  width: 9rem;
+  height: fit-content;
+  padding: .5rem;
+  font: 1.5rem sans-serif;
+  background: white;
+  border: 1px solid #127c88;
+  border-radius: 3px;
+  pointer-events: none;
+  z-index: 100;
+  transition: visibility 2s, opacity 0.5s linear; }
 
 .details {
   font-family: 'Montserrat', sans-serif;

@@ -45,3 +45,25 @@ export const filterDataByYear = (year, data) => {
   }
   return thisData
 }
+
+export const leastSquares = (xSeries, ySeries) => {
+  var reduceSumFunc = (prev, cur) => prev + cur;
+
+  var xBar = xSeries.reduce(reduceSumFunc) * 1.0 / xSeries.length;
+  var yBar = ySeries.reduce(reduceSumFunc) * 1.0 / ySeries.length;
+
+  var ssXX = xSeries.map((d) => Math.pow(d - xBar, 2))
+    .reduce(reduceSumFunc);
+
+  var ssYY = ySeries.map((d) => Math.pow(d - yBar, 2))
+    .reduce(reduceSumFunc);
+
+  var ssXY = xSeries.map((d, i) => (d - xBar) * (ySeries[i] - yBar))
+    .reduce(reduceSumFunc);
+
+  var slope = ssXY / ssXX;
+  var intercept = yBar - (xBar * slope);
+  var rSquare = Math.pow(ssXY, 2) / (ssXX * ssYY);
+
+  return [slope, intercept, rSquare];
+}

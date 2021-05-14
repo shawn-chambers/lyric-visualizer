@@ -1,20 +1,43 @@
 .chart-container {
   background-color: white;
   padding: 2rem;
-  max-width: 100%;
+  max-width: 840px;
   display: flex;
+  margin: auto;
+  border-radius: 4px;
   justify-content: center;
   transition: all 2s ease;
-  
+
   .plot-area {
     transition: all 2s ease;
   }
   svg {
     transition: all 2s ease;
-    fill: $color-tertiary;
+    fill: $color-secondary;
   }
 
   .bar {
-    transition: all 2s ease;
+    transition: y 2s ease, fill 0.8s ease, height 2s ease;
+
+    &:hover {
+      fill: $color-secondary-dark;
+    }
   }
+}
+
+
+.tool-tip {
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  width: 9rem;
+  height: fit-content;
+  padding: .5rem;
+  font: 1.5rem sans-serif;
+  background: white;
+  border: 1px solid $color-secondary-dark;
+  border-radius: 3px;
+  pointer-events: none;
+  z-index: 100;
+  transition: visibility 2s, opacity 0.5s linear;
 }
