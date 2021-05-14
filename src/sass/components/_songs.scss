@@ -1,3 +1,62 @@
+.songs {
+  &__list {
+    padding: 0;
+    text-align: center;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-evenly;
+    max-width: 75vw;
+    margin: auto;
+
+    &--li {
+      list-style: none;
+      min-width: 30%;
+      max-width: 3rem;
+      margin: 1%;
+      box-shadow: $shadow-1;
+      background: $color-primary;
+      border-radius: 4px;
+      transition: border .2s ease;
+      border: 2px solid $color-primary;
+      
+      &:hover {
+        border: 2px solid $color-secondary;
+      }
+    }
+  }
+}
+
 .song {
-  margin: 2rem 0;
+  padding: 1rem;
+  width: 100%;
+  min-height: 10rem;
+  box-sizing: border-box;
+  font-size: 1.2rem;
+  text-align: right;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  &__info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    line-height: 1.7rem;
+    gap: .75rem;
+    
+    &--label {
+      font-size: 1rem;
+      text-transform: uppercase;
+      text-align: left;
+      display: inline-block;
+      color: $color-grey;
+    }
+
+    &--variable {
+      font-family: 'Roboto';
+      font-size: 1.3rem;
+    }
+  }
+
 }

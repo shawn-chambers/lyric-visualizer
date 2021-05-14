@@ -7,24 +7,28 @@ const Songs = () => {
   const { songs, fetchLyricsById, lyrics, setSongId } = useContext(AppContext);
 
   return (
-    <>
-      {
-        songs.map((song, i) => {
-          return (
-            <Song
-              key={`${song.title}-${i}`}
-              song={song}
-              getLyrics={fetchLyricsById}
-              lyrics={lyrics}
-              handleDisplay={setShowLyrics}
-              displayNum={showLyrics}
-              songNum={i}
-              setSongId={setSongId}
-            />
-          )
-        })
-      }
-    </>
+    <div className="songs">
+      <ul className="songs__list">
+        {
+          songs.map((song, i) => {
+            return (
+              <li className="songs__list--li">
+                <Song
+                  key={`${song.title}-${i}`}
+                  song={song}
+                  getLyrics={fetchLyricsById}
+                  lyrics={lyrics}
+                  handleDisplay={setShowLyrics}
+                  displayNum={showLyrics}
+                  songNum={i}
+                  setSongId={setSongId}
+                />
+              </li>
+            )
+          })
+        }
+      </ul>
+    </div>
   )
 }
 

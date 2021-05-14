@@ -12,7 +12,7 @@ body {
   box-sizing: border-box;
   background-color: #c9cbce;
   padding: 0 0 3rem 0;
-  font-family: 'Raleway', sans-serif; }
+  font-family: sans-serif; }
 
 .billboard {
   height: 90vh;
@@ -37,7 +37,7 @@ body {
     .billboard__text--header {
       font-family: "Quattrocento", serif;
       font-size: 20rem;
-      text-shadow: 8px 7px 1px black; }
+      text-shadow: 8px 7px 1px #000606; }
       .billboard__text--header .mark {
         color: white; }
         .billboard__text--header .mark::before {
@@ -48,10 +48,11 @@ body {
           line-height: 1.07;
           color: #48c3d0; }
     .billboard__text--sub-header {
+      font-family: 'Raleway', sans-serif;
       font-size: 4.5rem;
       max-width: 75%;
       font-weight: 700;
-      text-shadow: 3px 3px 1px black; }
+      text-shadow: 3px 3px 1px #000606; }
 
 .chart-container {
   background-color: white;
@@ -61,7 +62,8 @@ body {
   margin: auto;
   border-radius: 4px;
   justify-content: center;
-  transition: all 2s ease; }
+  transition: all 2s ease;
+  box-shadow: 0 2px 4px rgba(0, 6, 6, 0.2); }
   .chart-container .plot-area {
     transition: all 2s ease; }
   .chart-container svg {
@@ -96,5 +98,50 @@ body {
   .lyrics b {
     font-weight: 700; }
 
+.songs__list {
+  padding: 0;
+  text-align: center;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: space-evenly;
+  max-width: 75vw;
+  margin: auto; }
+  .songs__list--li {
+    list-style: none;
+    min-width: 30%;
+    max-width: 3rem;
+    margin: 1%;
+    box-shadow: 0 2px 4px rgba(0, 6, 6, 0.2);
+    background: white;
+    border-radius: 4px;
+    transition: border .2s ease;
+    border: 2px solid white; }
+    .songs__list--li:hover {
+      border: 2px solid #48c3d0; }
+
 .song {
-  margin: 2rem 0; }
+  padding: 1rem;
+  width: 100%;
+  min-height: 10rem;
+  box-sizing: border-box;
+  font-size: 1.2rem;
+  text-align: right;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; }
+  .song__info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    line-height: 1.7rem;
+    gap: .75rem; }
+    .song__info--label {
+      font-size: 1rem;
+      text-transform: uppercase;
+      text-align: left;
+      display: inline-block;
+      color: #68696b; }
+    .song__info--variable {
+      font-family: 'Roboto';
+      font-size: 1.3rem; }
