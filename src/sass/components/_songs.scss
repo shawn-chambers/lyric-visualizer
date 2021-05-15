@@ -9,11 +9,19 @@
     max-width: 75vw;
     margin: auto;
 
+    .selected {
+      border: 2px solid $color-secondary;
+    }
+
+    &--container {
+      width: 25rem;
+      margin: 1%;
+    }
+
     &--song-container {
+      height: 12rem;
       list-style: none;
       min-width: 30%;
-      max-width: 3rem;
-      margin: 1%;
       box-shadow: $shadow-1;
       background: $color-primary;
       border-radius: 4px;
@@ -21,8 +29,7 @@
       border: 2px solid $color-primary;
       cursor: pointer;
 
-      &:hover,
-      &:active {
+      &:hover {
         border: 2px solid $color-secondary;
       }
     }

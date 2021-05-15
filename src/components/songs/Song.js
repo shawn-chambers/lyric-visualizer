@@ -8,7 +8,9 @@ const Song = ({
   displayNum,
   songNum,
   lyrics,
-  setSongId
+  setSongId,
+  selectSong,
+  display
 }) => {
   const [displayLyrics, setDisplayLyrics] = useState(false);
 
@@ -21,36 +23,40 @@ const Song = ({
     getLyrics(id);
     setDisplayLyrics(!displayLyrics);
     handleDisplay(num);
+    selectSong({ type: 'click', payload: {num, display } })
   }
-
-  const toggleLyrics = () => {
+  
+  const toggleLyrics = (num, display) => {
     setDisplayLyrics(!displayLyrics);
+    selectSong({ type: 'click', payload: {num, display } })
   }
 
   return (
-    <>
-      <div className="song" onClick={() => handleClick(song.id, songNum)}>
-        <div className="song__info">
-          <div className="top">
-            <div className="song__info--title">
-              {song.title}
+    <div className="songs__list--container">
+      <li className={`songs__list--song-container ${display ? 'selected' : ''}`} onClick={() => handleClick(song.id, songNum)}>
+        <div className="song" >
+          <div className="song__info">
+            <div className="top">
+              <div className="song__info--title">
+                {song.title}
+              </div>
+              <div className="song__info--artist">
+                {song.artist}
+              </div>
             </div>
-            <div className="song__info--artist">
-              {song.artist}
+            <div className="song__info--position">
+              pos. {` ${song.position}`}
             </div>
           </div>
-          <div className="song__info--position">
-            pos. {` ${song.position}`}
-          </div>
-        </div>
-      </div >
+        </div >
+      </li>
       {
         lyrics.length > 0
         && displayNum === songNum
         && displayLyrics
-        && <Lyrics toggle={toggleLyrics} />
+        && <Lyrics toggle={toggleLyrics} songNum={songNum} display={display}/>
       }
-    </>
+    </div>
   )
 }
 

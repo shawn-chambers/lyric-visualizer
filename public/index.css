@@ -107,18 +107,22 @@ body {
   justify-content: space-evenly;
   max-width: 75vw;
   margin: auto; }
+  .songs__list .selected {
+    border: 2px solid #48c3d0; }
+  .songs__list--container {
+    width: 25rem;
+    margin: 1%; }
   .songs__list--song-container {
+    height: 12rem;
     list-style: none;
     min-width: 30%;
-    max-width: 3rem;
-    margin: 1%;
     box-shadow: 0 2px 4px rgba(0, 6, 6, 0.2);
     background: white;
     border-radius: 4px;
     transition: border 0.2s ease;
     border: 2px solid white;
     cursor: pointer; }
-    .songs__list--song-container:hover, .songs__list--song-container:active {
+    .songs__list--song-container:hover {
       border: 2px solid #48c3d0; }
 
 .song {
