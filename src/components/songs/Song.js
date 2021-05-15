@@ -31,28 +31,17 @@ const Song = ({
     <>
       <div className="song" onClick={() => handleClick(song.id, songNum)}>
         <div className="song__info">
-          <span className="song__info--label">
-            Song: {' '}
-          </span>
-          <span className="song__info--variable">
-            {song.title}
-          </span>
-        </div>
-        <div className="song__info">
-          <span className="song__info--label">
-            Artist: {' '}
-          </span>
-          <span className="song__info--variable">
-            {song.artist}
-          </span>
-        </div>
-        <div className="song__info">
-          <span className="song__info--label">
-            Position: {' '}
-          </span>
-          <span className="song__info--variable">
-            {`${song.position}`}
-          </span>
+          <div className="top">
+            <div className="song__info--title">
+              {song.title}
+            </div>
+            <div className="song__info--artist">
+              {song.artist}
+            </div>
+          </div>
+          <div className="song__info--position">
+            pos. {` ${song.position}`}
+          </div>
         </div>
       </div >
       {

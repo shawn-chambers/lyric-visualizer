@@ -12,7 +12,7 @@ const Songs = () => {
         {
           songs.map((song, i) => {
             return (
-              <li className="songs__list--li">
+              <li className="songs__list--song-container">
                 <Song
                   key={`${song.title}-${i}`}
                   song={song}

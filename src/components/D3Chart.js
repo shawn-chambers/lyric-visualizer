@@ -24,7 +24,7 @@ const D3Chart = () => {
     (svg) => {
       const height = 500;
       const width = 800;
-      const margin = { top: 20, right: 30, bottom: 30, left: 40 };
+      const margin = { top: 20, right: 30, bottom: 40, left: 40 };
 
 
       const x = d3
@@ -40,20 +40,27 @@ const D3Chart = () => {
         .rangeRound([height - margin.bottom, margin.top]);
 
       const xAxis = (g) =>
-        g.attr("transform", `translate(0,${height - margin.bottom})`).call(
-          d3
-            .axisBottom(x)
-            .tickValues(
-              d3
-                .ticks(...d3.extent(x.domain()), width / 40)
-            )
-            .tickSizeOuter(0)
-        );
+        g.attr("transform", `translate(0,${height - margin.bottom})`)
+          .style("font-size", "1.4rem")
+          .call(
+            d3
+              .axisBottom(x)
+              .tickValues(
+                d3
+                  .ticks(...d3.extent(x.domain()), width / 40)
+              )
+              .tickSizeOuter(0)
+          )
+          .selectAll('text')
+          .attr("dx", "-2.3rem")
+          .attr("dy", "0.4rem")
+          .attr('transform', 'rotate(-65)')
 
       const y1Axis = (g) =>
         g
           .attr("transform", `translate(${margin.left}, 0)`)
           .style("color", "black")
+          .style("font-size", "1.4rem")
           .call(d3.axisLeft(y1).ticks(null, "s"))
           .call((g) => g.select(".domain").remove())
           .call((g) =>
