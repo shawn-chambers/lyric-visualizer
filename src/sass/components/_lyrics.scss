@@ -1,6 +1,7 @@
 .lyrics {
   font-family: "Montserrat", sans-serif;
   transition: all 1s ease;
+
   width: 150%;
   position: relative;
   right: 25%;
@@ -8,7 +9,7 @@
   &__text {
     font-size: 1.1rem;
   }
-  
+
   b {
     font-weight: 700;
   }

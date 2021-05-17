@@ -111,6 +111,8 @@ p {
 
 .details {
   width: fit-content;
+  width: -moz-fit-content;
+  width: -webkit-fit-content;
   margin: 2rem auto 2rem auto;
   font-family: "Montserrat", sans-serif; }
   .details .total {
@@ -132,7 +134,9 @@ p {
 
 .tools-container {
   margin: auto;
-  width: fit-content; }
+  width: fit-content;
+  width: -moz-fit-content;
+  width: -webkit-fit-content; }
 
 .lyrics {
   font-family: "Montserrat", sans-serif;
@@ -148,6 +152,7 @@ p {
 .search {
   margin: 5rem 0 1rem 0;
   width: fit-content;
+  width: -moz-fit-content;
   box-shadow: 0 2px 4px rgba(0, 6, 6, 0.2); }
   .search input, .search button {
     font-size: 1.4rem;

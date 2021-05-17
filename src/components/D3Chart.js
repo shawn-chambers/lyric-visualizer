@@ -52,8 +52,8 @@ const D3Chart = () => {
               .tickSizeOuter(0)
           )
           .selectAll('text')
-          .attr("dx", "-2.3rem")
-          .attr("dy", "0.4rem")
+          .attr("dx", "-23px")
+          .attr("dy", "4px")
           .attr('transform', 'rotate(-65)')
 
       const y1Axis = (g) =>

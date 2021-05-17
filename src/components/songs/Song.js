@@ -21,6 +21,8 @@ const Song = ({
       return {
         maxHeight: "2000px",
         height: "fit-content",
+        height: "-moz-fit-content",
+        height: "-webkit-fit-content",
         opacity: 1,
       }
     } else {
