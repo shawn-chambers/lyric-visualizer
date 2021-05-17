@@ -1,6 +1,9 @@
 .lyrics {
+  margin: 2rem 0;
   font-family: "Montserrat", sans-serif;
-
+  transition: all 1s ease;
+  max-width: 50vw;
+  
   b {
     font-weight: 700;
   }

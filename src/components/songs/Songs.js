@@ -40,7 +40,6 @@ const Songs = () => {
   return (
     <div className="songs">
       <ul className="songs__list">
-        {console.log(state)}
         {
           songs.map((song, i) => {
             return (

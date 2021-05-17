@@ -1,5 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Lyrics from "../Lyrics";
+import useDimension from "../../hooks/useDimension";
+
 
 const Song = ({
   song,
@@ -13,6 +15,27 @@ const Song = ({
   display
 }) => {
   const [displayLyrics, setDisplayLyrics] = useState(false);
+  
+  const setHeight = (display) => {
+    if (display) {
+      return {
+        maxHeight: "2000px",
+        height: "fit-content",
+        opacity: 1,
+        width: "130%",
+        position: 'relative',
+        right: "15%"
+      }
+    } else {
+      return {
+        maxHeight: "1px",
+        height: height,
+        opacity: 0
+      }
+    }
+  }
+  const lyricDivRef = useRef(null);
+  const { height } = useDimension(lyricDivRef);
 
   useEffect(() => {
     setDisplayLyrics(true);
@@ -23,12 +46,11 @@ const Song = ({
     getLyrics(id);
     setDisplayLyrics(!displayLyrics);
     handleDisplay(num);
-    selectSong({ type: 'click', payload: {num, display } })
+    selectSong({ type: 'click', payload: { num, display } })
   }
-  
+
   const toggleLyrics = (num, display) => {
-    setDisplayLyrics(!displayLyrics);
-    selectSong({ type: 'click', payload: {num, display } })
+    selectSong({ type: 'click', payload: { num, display } })
   }
 
   return (
@@ -50,12 +72,14 @@ const Song = ({
           </div>
         </div >
       </li>
-      {
-        lyrics.length > 0
-        && displayNum === songNum
-        && displayLyrics
-        && <Lyrics toggle={toggleLyrics} songNum={songNum} display={display}/>
-      }
+      <div style={setHeight(display)} className="lyrics" ref={lyricDivRef}>
+        {
+(          lyrics.length > 0
+          && displayNum === songNum
+          && displayLyrics)
+          ? <Lyrics toggle={toggleLyrics} songNum={songNum} display={display} /> : <div style={{height: "1px"}}></div>
+        }
+      </div>
     </div>
   )
 }

@@ -37,6 +37,7 @@
     "babel-loader": "^8.2.2",
     "file-loader": "^6.2.0",
     "node-sass": "^5.0.0",
+    "resize-observer-polyfill": "^1.5.1",
     "webpack": "^5.12.3",
     "webpack-cli": "^4.3.1"
   }

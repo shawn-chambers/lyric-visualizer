@@ -122,7 +122,7 @@ const D3Chart = () => {
             .style('top', (e.pageY - 45) + 'px')
         });
 
-        rects.on('mouseout', (e) => {
+        rects.on("mouseout", (e) => {
           tip.transition()
             .duration(500)
             .style('opacity', 0);
