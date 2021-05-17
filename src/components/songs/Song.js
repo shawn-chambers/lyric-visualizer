@@ -15,7 +15,7 @@ const Song = ({
   display
 }) => {
   const [displayLyrics, setDisplayLyrics] = useState(false);
-  
+
   const setHeight = (display) => {
     if (display) {
       return {
@@ -46,10 +46,6 @@ const Song = ({
     selectSong({ type: 'click', payload: { num, display } })
   }
 
-  const toggleLyrics = (num, display) => {
-    selectSong({ type: 'click', payload: { num, display } })
-  }
-
   return (
     <div className="songs__list--container">
       <li className={`songs__list--song-container ${display ? 'selected' : ''}`} onClick={() => handleClick(song.id, songNum)}>
@@ -71,10 +67,10 @@ const Song = ({
       </li>
       <div style={setHeight(display)} className="lyrics" ref={lyricDivRef}>
         {
-(          lyrics.length > 0
-          && displayNum === songNum
-          && displayLyrics)
-          ? <Lyrics /> : <div style={{height: "1px"}}></div>
+          (lyrics.length > 0
+            && displayNum === songNum
+            && displayLyrics)
+            ? <Lyrics /> : <div style={{ height: "1px" }}></div>
         }
       </div>
     </div>
