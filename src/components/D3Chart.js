@@ -131,6 +131,7 @@ const D3Chart = () => {
         rects.on("click", (e) => {
           handleBarChartClick(e);
           tip.destroy();
+          // tip.remove();
         })
 
         const xLabels = makeYears(1970, 2020);

@@ -1,4 +1,33 @@
 .details {
-  font-family: 'Montserrat', sans-serif;
-  font-weight: 700;
+  width: fit-content;
+  margin: 2rem auto 2rem auto;
+  font-family: "Montserrat", sans-serif;
+
+  .total {
+    font-weight: 700;
+    font-size: 5rem;
+    text-align: center;
+  }
+
+  .selection {
+    font-size: 2.5rem;
+    span {
+      position: relative;
+      font-size: 2rem;
+      font-family: "Montserrat", sans-serif;
+      font-style: italic;
+      font-weight: 200;
+      bottom: .2rem;
+    }
+  }
+
+  .keyword {
+    text-decoration: underline;
+    text-decoration-color: $color-secondary;
+  }
+}
+
+.tools-container {
+  margin: auto;
+  width: fit-content;
 }

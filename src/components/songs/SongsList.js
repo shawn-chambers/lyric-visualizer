@@ -10,11 +10,17 @@ const setInitialState = (songs) => {
   return iniialState;
 }
 
-const Songs = () => {
+const SongsList = () => {
   const [showLyrics, setShowLyrics] = useState(null);
   const { songs, fetchLyricsById, lyrics, setSongId } = useContext(AppContext);
 
   var initialState = setInitialState(songs);
+
+  useEffect(() => {
+    if (lyrics.length === 0) {
+      dispatch({type: 'clear'})
+    }
+  }, [lyrics])
 
   const lyricReducer = (prevState, action) => {
     switch (action.type) {
@@ -25,6 +31,10 @@ const Songs = () => {
           ...initialState,
           [num]: status,
         }
+      case 'clear':
+        return {
+          ...initialState
+        }  
       default:
         console.log('default, oops');
         return prevState;
@@ -63,4 +73,4 @@ const Songs = () => {
   )
 }
 
-export default Songs;
+export default SongsList;

@@ -12,7 +12,15 @@ body {
   box-sizing: border-box;
   background-color: #c9cbce;
   padding: 0 0 3rem 0;
-  font-family: sans-serif; }
+  font-family: sans-serif;
+  color: #000606; }
+
+p {
+  font-size: 1.7rem;
+  margin: 2rem auto;
+  max-width: 70rem;
+  font-family: 'Source Serif Pro', serif;
+  line-height: 1.5; }
 
 .billboard {
   height: 90vh;
@@ -22,7 +30,8 @@ body {
   background-repeat: no-repeat;
   display: flex;
   flex-direction: column;
-  justify-content: center; }
+  justify-content: center;
+  margin-bottom: 6rem; }
   .billboard__backdrop {
     width: 100vw;
     height: auto; }
@@ -53,11 +62,21 @@ body {
       max-width: 75%;
       font-weight: 700;
       text-shadow: 3px 3px 1px #000606; }
+    .billboard__text--author {
+      font-family: 'Raleway', sans-serif;
+      margin: 1rem;
+      font-size: 1.5rem;
+      max-width: 75%;
+      font-weight: 700;
+      text-shadow: 1px 1px 1px #000606; }
+      .billboard__text--author a {
+        text-decoration: underline;
+        color: #48c3d0; }
 
 .chart-container {
   background-color: white;
   padding: 2rem;
-  max-width: 840px;
+  width: 840px;
   display: flex;
   margin: auto;
   border-radius: 4px;
@@ -81,7 +100,8 @@ body {
   width: 9rem;
   height: fit-content;
   padding: .5rem;
-  font: 1.5rem sans-serif;
+  font-size: 1.5rem;
+  font-family: 'Roboto', sans-serif;
   background: white;
   border: 1px solid #127c88;
   border-radius: 3px;
@@ -90,17 +110,61 @@ body {
   transition: visibility 2s, opacity 0.5s linear; }
 
 .details {
-  font-family: 'Montserrat', sans-serif;
-  font-weight: 700; }
+  width: fit-content;
+  margin: 2rem auto 2rem auto;
+  font-family: "Montserrat", sans-serif; }
+  .details .total {
+    font-weight: 700;
+    font-size: 5rem;
+    text-align: center; }
+  .details .selection {
+    font-size: 2.5rem; }
+    .details .selection span {
+      position: relative;
+      font-size: 2rem;
+      font-family: "Montserrat", sans-serif;
+      font-style: italic;
+      font-weight: 200;
+      bottom: .2rem; }
+  .details .keyword {
+    text-decoration: underline;
+    text-decoration-color: #48c3d0; }
+
+.tools-container {
+  margin: auto;
+  width: fit-content; }
 
 .lyrics {
   font-family: "Montserrat", sans-serif;
   transition: all 1s ease;
-  width: 130%;
+  width: 150%;
   position: relative;
-  right: 15%; }
+  right: 25%; }
+  .lyrics__text {
+    font-size: 1.1rem; }
   .lyrics b {
     font-weight: 700; }
+
+.search {
+  margin: 5rem 0 1rem 0;
+  width: fit-content;
+  box-shadow: 0 2px 4px rgba(0, 6, 6, 0.2); }
+  .search input, .search button {
+    font-size: 1.4rem;
+    font-family: 'Roboto', sans-serif;
+    border: none;
+    height: 4rem;
+    padding: 1rem; }
+  .search input {
+    border-radius: 4px 0 0 4px;
+    width: 15rem; }
+  .search button {
+    border-radius: 0 4px 4px 0;
+    cursor: pointer;
+    transition: all .2s ease; }
+    .search button:hover {
+      background-color: #48c3d0;
+      color: white; }
 
 .songs__list {
   padding: 0;
@@ -154,7 +218,9 @@ body {
       font-size: 1rem;
       text-align: right; }
     .song__info--artist {
-      font-family: "Zilla Slab", serif;
+      font-family: 'Source Serif Pro', serif;
+      font-style: italic;
+      max-width: 85%;
       font-size: 1.6rem;
       text-align: left;
       line-height: 1.7rem; }

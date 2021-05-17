@@ -67,7 +67,9 @@
     }
 
     &--artist {
-      font-family: "Zilla Slab", serif;
+      font-family: 'Source Serif Pro', serif;
+      font-style: italic;
+      max-width: 85%;
       font-size: 1.6rem;
       text-align: left;
       line-height: 1.7rem;
