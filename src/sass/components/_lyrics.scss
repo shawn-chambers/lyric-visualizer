@@ -2,6 +2,10 @@
   font-family: "Montserrat", sans-serif;
   transition: all 1s ease;
 
+  @media not all and (min-resolution:.001dpcm){ @supports (-webkit-appearance:none) { 
+    -webkit-transition: none;
+  }}
+
   width: 150%;
   position: relative;
   right: 25%;

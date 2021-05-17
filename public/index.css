@@ -144,6 +144,10 @@ p {
   width: 150%;
   position: relative;
   right: 25%; }
+  @media not all and (min-resolution: 0.001dpcm) {
+    @supports (-webkit-appearance: none) {
+      .lyrics {
+        -webkit-transition: none; } } }
   .lyrics__text {
     font-size: 1.1rem; }
   .lyrics b {

@@ -17,12 +17,24 @@ const Song = ({
   const [displayLyrics, setDisplayLyrics] = useState(false);
 
   const setHeight = (display) => {
+
+    var newHeight = '';
+
+    // NOTES: may need updating for browser compatibility
+    if (
+      navigator.appVersion.indexOf('Chrome') === -1 &&
+      navigator.appVersion.indexOf('Safari') === -1
+    ) {
+      newHeight = "-moz-fit-content"
+    } else {
+      newHeight = "-webkit-fit-content"
+    }
+
     if (display) {
       return {
         maxHeight: "2000px",
         height: "fit-content",
-        height: "-moz-fit-content",
-        height: "-webkit-fit-content",
+        height: newHeight,
         opacity: 1,
       }
     } else {

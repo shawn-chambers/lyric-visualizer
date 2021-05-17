@@ -18,7 +18,6 @@ const SearchBar = () => {
   return (
     <div className="search">
       <form>
-        {console.log('term', typeof term, term)}
         <input
           value={term}
           onKeyDown={handleKeyPress}
