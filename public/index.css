@@ -94,10 +94,11 @@ body {
   font-weight: 700; }
 
 .lyrics {
-  margin: 2rem 0;
   font-family: "Montserrat", sans-serif;
   transition: all 1s ease;
-  max-width: 50vw; }
+  width: 130%;
+  position: relative;
+  right: 15%; }
   .lyrics b {
     font-weight: 700; }
 
@@ -117,6 +118,7 @@ body {
     margin: 1%; }
   .songs__list--song-container {
     height: 12rem;
+    margin: 1rem 0;
     list-style: none;
     min-width: 30%;
     box-shadow: 0 2px 4px rgba(0, 6, 6, 0.2);

@@ -22,9 +22,6 @@ const Song = ({
         maxHeight: "2000px",
         height: "fit-content",
         opacity: 1,
-        width: "130%",
-        position: 'relative',
-        right: "15%"
       }
     } else {
       return {
@@ -77,7 +74,7 @@ const Song = ({
 (          lyrics.length > 0
           && displayNum === songNum
           && displayLyrics)
-          ? <Lyrics toggle={toggleLyrics} songNum={songNum} display={display} /> : <div style={{height: "1px"}}></div>
+          ? <Lyrics /> : <div style={{height: "1px"}}></div>
         }
       </div>
     </div>

@@ -3,13 +3,11 @@ import { AppContext } from '../context/AppContext';
 
 
 
-export const Lyrics = ({ toggle, songNum, display }) => {
+export const Lyrics = () => {
   const { lyrics } = useContext(AppContext);
 
   return (
-    <div onClick={() => toggle(songNum, display)}>
       <div dangerouslySetInnerHTML={{ __html: lyrics }} className="lyrics__text"></div>
-    </div>
   )
 }
 
