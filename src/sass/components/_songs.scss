@@ -7,7 +7,7 @@
     flex-direction: row;
     justify-content: space-evenly;
     max-width: 75vw;
-    margin: auto;
+    margin: 0 auto 4rem auto;
 
     .selected {
       border: 2px solid $color-secondary;

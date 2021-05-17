@@ -97,7 +97,7 @@ p {
   display: flex;
   justify-content: center;
   position: absolute;
-  width: 9rem;
+  width: 8.5rem;
   height: fit-content;
   padding: .5rem;
   font-size: 1.5rem;
@@ -133,7 +133,7 @@ p {
     text-decoration-color: #48c3d0; }
 
 .tools-container {
-  margin: auto;
+  margin: 2rem auto 4rem auto;
   width: fit-content;
   width: -moz-fit-content;
   width: -webkit-fit-content; }
@@ -149,7 +149,8 @@ p {
       .lyrics {
         -webkit-transition: none; } } }
   .lyrics__text {
-    font-size: 1.1rem; }
+    font-size: 1.1rem;
+    margin: 1rem 0; }
   .lyrics b {
     font-weight: 700; }
 
@@ -183,7 +184,7 @@ p {
   flex-direction: row;
   justify-content: space-evenly;
   max-width: 75vw;
-  margin: auto; }
+  margin: 0 auto 4rem auto; }
   .songs__list .selected {
     border: 2px solid #48c3d0; }
   .songs__list--container {
