@@ -9,7 +9,8 @@
     "build:dev": "webpack --watch",
     "build:prod": "webpack --config webpack.prod.js",
     "compile:sass": "node-sass src/sass/main.scss public/index.css -w",
-    "bundle-report": "webpack-bundle-analyzer --port 4200 compilation-stats.json"
+    "bundle-report": "webpack-bundle-analyzer --port 4200 compilation-stats.json",
+    "heroku-postbuild": "webpack --config webpack.prod.js"
   },
   "repository": {
     "type": "git",
