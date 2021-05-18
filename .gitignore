@@ -105,3 +105,10 @@ dist
 
 public/bundle.js
 public/*.jpg
+public/*.js
+public/bundle.js.LICENSE.txt
+public/*.gz
+
+.DS_Store
+
+compilation-stats.json
