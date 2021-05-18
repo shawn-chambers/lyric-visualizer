@@ -8,7 +8,11 @@ const lyricsRouter = require('./routes/lyricsRoutes.js');
 const songsRouter = require('./routes/songsRoutes.js');
 
 app.use(compression());
-app.use(morgan('dev'));
+
+if (process.env.NODE_ENV === 'development') {
+  app.use(morgan('dev'));
+}
+
 app.get('*.gz', function (req, res, next) {
   if (req.headers['x-no-compression']) next();
   res.set('Content-Encoding', 'gzip');

@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon server/index.js",
+    "start": "node server/index.js",
+    "start:dev": "NODE_ENV=development nodemon server/index.js",
     "build:dev": "webpack --watch",
     "build:prod": "webpack --config webpack.prod.js",
     "compile:sass": "node-sass src/sass/main.scss public/index.css -w",
