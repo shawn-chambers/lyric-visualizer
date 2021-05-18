@@ -1,23 +1,22 @@
-const { Pool } = require('pg');
+const { Client } = require('pg');
 require('dotenv').config();
 
-const pool = new Pool({
-  user: process.env.PGUSER,
-  host: process.env.PGHOST,
-  database: process.env.PGDATABASE,
-  password: null,
-  port: process.env.PGPORT
+const client = new Client({
+  connectionString: process.env.DATABASE_URL,
+  ssl: {
+    rejectUnauthorized: false
+  }
 });
 
-pool.connect()
+client.connect()
   .then(() => {
     console.log(`successful postgress connection to ${process.env.PGDATABASE}`);
   })
   .catch(() => {
     console.error('unsuccessful connection');
-  })
+  });
 
 
 module.exports = {
-  db: pool
+  db: client
 }
