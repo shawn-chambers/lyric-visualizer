@@ -13,7 +13,7 @@ export const AppContextProvider = (props) => {
 
   const fetchSongsByWord = (query) => {
     if (query.length > 0) {
-      axios.get(`http://localhost:3030/api/songs/${query}`)
+      axios.get(`/api/songs/${query}`)
         .then(songs => {
           setWordData(songs.data.rows);
         })
@@ -25,7 +25,7 @@ export const AppContextProvider = (props) => {
 
   const fetchLyricsById = (id) => {
     if (id !== songId) {
-      axios.get(`http://localhost:3030/api/lyrics/${id}`)
+      axios.get(`/api/lyrics/${id}`)
         .then(({ data }) => {
           const lyrics = data.rows[0].lyrics;
           const html = formatLyrics(lyrics, word);
