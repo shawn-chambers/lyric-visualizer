@@ -10,7 +10,7 @@ const client = new Client({
 
 client.connect()
   .then(() => {
-    console.log(`successful postgress connection to ${process.env.PGDATABASE}`);
+    console.log(`successful postgress connection to ${process.env.DATABASE_URL}`);
   })
   .catch(() => {
     console.error('unsuccessful connection');

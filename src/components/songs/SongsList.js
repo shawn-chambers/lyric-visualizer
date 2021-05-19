@@ -36,7 +36,6 @@ const SongsList = () => {
           ...initialState
         }  
       default:
-        console.log('default, oops');
         return prevState;
     }
   }
