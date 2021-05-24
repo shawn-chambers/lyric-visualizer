@@ -15,6 +15,9 @@ body {
   font-family: sans-serif;
   color: #000606; }
 
+button {
+  background-color: #efefef; }
+
 p {
   font-size: 1.7rem;
   margin: 2rem auto;
@@ -175,6 +178,68 @@ p {
     .search button:hover {
       background-color: #48c3d0;
       color: white; }
+
+.container {
+  user-select: none;
+  cursor: pointer;
+  position: relative;
+  text-align: left;
+  display: block;
+  margin: auto;
+  width: 15rem;
+  color: #000606;
+  font-size: 1.4rem;
+  font-family: "Roboto", sans-serif;
+  max-height: 4rem; }
+  .container .select,
+  .container button,
+  .container ul {
+    padding: 1rem;
+    box-shadow: 0 2px 4px rgba(0, 6, 6, 0.2); }
+  .container .select {
+    width: 100%;
+    background-color: white;
+    color: #000606;
+    height: 4rem;
+    border-radius: 4px;
+    color: #757575;
+    display: flex;
+    align-items: center;
+    transition: all 1.5s linear; }
+  .container button {
+    font-size: 1.4rem;
+    font-family: "Roboto", sans-serif;
+    border: none;
+    height: 4rem;
+    padding: 1rem; }
+  .container ul {
+    position: relative;
+    display: block;
+    list-style: none;
+    width: 100%;
+    overflow: hidden;
+    overflow-y: auto;
+    z-index: 2;
+    height: 0rem;
+    padding: 0;
+    max-height: 0rem;
+    border-radius: 0 0 4px 4px;
+    background-color: #efefef;
+    transition: all 0.5s ease, border-radius; }
+    .container ul li {
+      width: 100%;
+      margin: .5rem 0;
+      text-align: center; }
+  .container button {
+    border-radius: 0 4px 4px 0;
+    cursor: pointer;
+    transition: all 0.2s ease; }
+    .container button:hover {
+      background-color: #48c3d0;
+      color: white; }
+
+.selected .select {
+  border-radius: 4px 4px 0 0; }
 
 .songs__list {
   padding: 0;
