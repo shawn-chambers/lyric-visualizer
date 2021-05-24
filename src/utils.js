@@ -93,10 +93,40 @@ export const filterWordsByYear = (words) => {
     if (wordObj.word === 'everyth') {
       wordObj = {...wordObj, word: 'everything'}
     }
+    if (wordObj.word === 'someth') {
+      wordObj = {...wordObj, word: 'something'}
+    }
     if (wordObj.word === 'danc') {
       wordObj = {...wordObj, word: 'dance'}
     }
+    if (wordObj.word === 'caus') {
+      wordObj = {...wordObj, word: 'cause'}
+    }
+    if (wordObj.word === 'won') {
+      wordObj = {...wordObj, word: 'wont'}
+    }
+    if (wordObj.word === 'foreve') {
+      wordObj = {...wordObj, word: 'forever'}
+    }
+    if (wordObj.word === 'pleas') {
+      wordObj = {...wordObj, word: 'please'}
+    }
+    if (wordObj.word === 'promis') {
+      wordObj = {...wordObj, word: 'promise'}
+    }
+    if (wordObj.word === 'chanc') {
+      wordObj = {...wordObj, word: 'chance'}
+    }
+    if (wordObj.word === 'insid') {
+      wordObj = {...wordObj, word: 'inside'}
+    }
+    if (wordObj.word === 'jungl') {
+      wordObj = {...wordObj, word: 'jungle'}
+    }
+    if (wordObj.word === 'mayb') {
+      wordObj = {...wordObj, word: 'maybe'}
+    }
     return wordObj;
   })
-  console.log('filtered words', filtered);
+  return filtered;
 }
