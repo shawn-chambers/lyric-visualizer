@@ -126,6 +126,9 @@ export const filterWordsByYear = (words) => {
     if (wordObj.word === 'mayb') {
       wordObj = {...wordObj, word: 'maybe'}
     }
+    if (wordObj.word === 'somewher') {
+      wordObj = {...wordObj, word: 'somewhere'}
+    }
     return wordObj;
   })
   return filtered;

@@ -6,6 +6,7 @@ import D3Chart from './D3Chart';
 import Billboard from './Billboard';
 import Intro from './Intro';
 import YearSearchBar from './YearSearchBar';
+import CircleBarChart from './CircleBarChart';
 
 const Dashboard = () => {
   const { wordData, word, songs } = useContext(AppContext);
@@ -15,6 +16,7 @@ const Dashboard = () => {
       <Billboard />
       <Intro />
       <YearSearchBar />
+      <CircleBarChart />
       <div className="tools-container">
         <WordSearchBar />
         <D3Chart />

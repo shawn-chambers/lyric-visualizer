@@ -112,6 +112,12 @@ p {
   z-index: 100;
   transition: visibility 2s, opacity 0.5s linear; }
 
+.circle-chart circle {
+  fill: none; }
+
+.circle-chart .r-axis text {
+  transform: translate(-22px, 7px); }
+
 .details {
   width: fit-content;
   width: -moz-fit-content;

@@ -40,15 +40,11 @@ export const AppContextProvider = (props) => {
   }
 
   const fetchWordsByYear = (year) => {
-    console.log('fetching words', year)
     if (year > 0) {
       axios.get(`/api/lyrics/?year=${year}`)
         .then(({ data }) => {
           let filteredWords = filterWordsByYear(data.rows);
           setWordsByYear(filteredWords);
-        })
-        .then(() => {
-          console.log('wordsByYear', wordsByYear)
         })
         .catch(err => {
           console.error('Error fetching words by year:', err);
