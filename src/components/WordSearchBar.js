@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { AppContext } from '../context/AppContext';
 
-const SearchBar = () => {
+const WordSearchBar = () => {
   const { fetchSongsByWord, word, setWord } = useContext(AppContext);
   const [term, setTerm] = useState(word);
 
@@ -31,4 +31,4 @@ const SearchBar = () => {
   )
 }
 
-export default SearchBar;
+export default WordSearchBar;

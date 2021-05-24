@@ -1,10 +1,11 @@
 import React, { useContext } from 'react';
 import { AppContext } from '../context/AppContext';
-import SearchBar from './SearchBar';
+import WordSearchBar from './WordSearchBar';
 import Songs from './songs/SongsList';
 import D3Chart from './D3Chart';
 import Billboard from './Billboard';
 import Intro from './Intro';
+import YearSearchBar from './YearSearchBar';
 
 const Dashboard = () => {
   const { wordData, word, songs } = useContext(AppContext);
@@ -13,8 +14,9 @@ const Dashboard = () => {
     <>
       <Billboard />
       <Intro />
+      <YearSearchBar />
       <div className="tools-container">
-        <SearchBar />
+        <WordSearchBar />
         <D3Chart />
       </div>
       {

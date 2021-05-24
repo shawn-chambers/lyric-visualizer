@@ -10,6 +10,8 @@ export const AppContextProvider = (props) => {
   const [songs, setSongs] = useState([]);
   const [lyrics, setLyrics] = useState('');
   const [songId, setSongId] = useState(null);
+  const [year, setYear] = useState('');
+  const [wordsByYear, setWordsByYear] = useState([]);
 
   const fetchSongsByWord = (query) => {
     if (query.length > 0) {
@@ -37,6 +39,18 @@ export const AppContextProvider = (props) => {
     }
   }
 
+  const fetchWordsByYear = (year) => {
+    if (year.length) {
+      axios.get(`/api/lyrics/?year=${year}`)
+        .then(result => {
+          console.log('fethced words by year -->', result);
+        })
+        .catch(err => {
+          console.error('Error fetching words by year:', err);
+        })
+    }
+  }
+
   return (
     <AppContext.Provider
       value={{
@@ -49,7 +63,12 @@ export const AppContextProvider = (props) => {
         setSongs,
         lyrics,
         setLyrics,
-        setSongId
+        setSongId,
+        fetchWordsByYear,
+        year,
+        setYear,
+        wordsByYear,
+        setWordsByYear
       }}
     >
       {props.children}
