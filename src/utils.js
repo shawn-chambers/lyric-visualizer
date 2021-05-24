@@ -9,10 +9,10 @@ export const makeYears = (start, end) => {
 export const formatLyrics = (lyrics, keyWord) => {
   let str = lyrics.split('\n').join('<br>');
   const regEx1 = new RegExp(keyWord, 'g');
-  str = str.replace(regEx1, '<b>'+ keyWord + '</b>')
+  str = str.replace(regEx1, '<b>' + keyWord + '</b>')
   keyWord = keyWord.charAt(0).toUpperCase() + keyWord.slice(1)
   const regEx2 = new RegExp(keyWord, 'g');
-  return str.replace(regEx2, '<b>'+ keyWord + '</b>');
+  return str.replace(regEx2, '<b>' + keyWord + '</b>');
 }
 
 export const reduceSongsByYear = (data) => {
@@ -28,7 +28,7 @@ export const reduceSongsByYear = (data) => {
 
   let dataArr = [];
 
-  for (let i = 0; i < years.length; i ++) {
+  for (let i = 0; i < years.length; i++) {
     let count = dataByYear[years[i]] || 0;
     dataArr.push({ year: years[i], count });
   }
@@ -38,10 +38,10 @@ export const reduceSongsByYear = (data) => {
 export const filterDataByYear = (year, data) => {
   let thisData = 0;
   for (let j = 0; j < data.length; j++) {
-      if (data[j].year === year) {
-          thisData = data[j].count
-          break;
-      }
+    if (data[j].year === year) {
+      thisData = data[j].count
+      break;
+    }
   }
   return thisData
 }
@@ -66,4 +66,37 @@ export const leastSquares = (xSeries, ySeries) => {
   var rSquare = Math.pow(ssXY, 2) / (ssXX * ssYY);
 
   return [slope, intercept, rSquare];
+}
+
+export const filterWordsByYear = (words) => {
+  let filtered = words.filter((wordObj) => {
+    if (wordObj.word.length > 2) {
+      return wordObj;
+    } 
+  }).map((wordObj) => {
+    if (wordObj.word[wordObj.word.length - 1] === 'v') {
+      wordObj = {...wordObj, word: wordObj.word += 'e'}
+    }
+    if (wordObj.word[wordObj.word.length -1] === 'i') {
+      let newWord = wordObj.word.replace(/.$/, 'y');
+      wordObj = {...wordObj, word: newWord}
+    }
+    if (wordObj.word === 'littl') {
+      wordObj = {...wordObj, word: 'little'}
+    }
+    if (wordObj.word === 'alway') {
+      wordObj = {...wordObj, word: 'always'}
+    }
+    if (wordObj.word === 'togeth') {
+      wordObj = {...wordObj, word: 'together'}
+    }
+    if (wordObj.word === 'everyth') {
+      wordObj = {...wordObj, word: 'everything'}
+    }
+    if (wordObj.word === 'danc') {
+      wordObj = {...wordObj, word: 'dance'}
+    }
+    return wordObj;
+  })
+  console.log('filtered words', filtered);
 }

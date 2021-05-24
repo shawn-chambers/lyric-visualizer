@@ -1,5 +1,5 @@
 import React, { useState, createContext } from 'react';
-import { formatLyrics } from '../utils';
+import { formatLyrics, filterWordsByYear } from '../utils';
 import axios from 'axios';
 
 export const AppContext = createContext();
@@ -40,10 +40,11 @@ export const AppContextProvider = (props) => {
   }
 
   const fetchWordsByYear = (year) => {
-    if (year.length) {
+    if (year.length > 0) {
       axios.get(`/api/lyrics/?year=${year}`)
-        .then(result => {
-          console.log('fethced words by year -->', result);
+        .then(({ data }) => {
+          let filteredWords = filterWordsByYear(data.rows);
+          setWordsByYear(filteredWords);
         })
         .catch(err => {
           console.error('Error fetching words by year:', err);
