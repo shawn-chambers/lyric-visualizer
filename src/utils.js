@@ -133,3 +133,5 @@ export const filterWordsByYear = (words) => {
   })
   return filtered;
 }
+
+export const colorArray = ["#216171", "#127c88", "#3a9eac", "#3ea7b5", "#42b1bf", "#49c3d0", "#44cadd", "#42cde3", "#3fd1e9", "#3ad8f5", "#37ddff"]

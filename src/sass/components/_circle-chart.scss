@@ -1,18 +1,27 @@
 .circle-chart {
   transition: all 2s ease;
+  display: flex;
+  justify-content: center;
+
   circle {
     fill: none;
   }
 
   .axis line,
   .axis circle {
-    stroke: #cccccc;
-    stroke-width: 1px;
+    stroke: $color-background;
+    stroke-width: 3px;
   }
 
+  text {
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+  }
+  
   .r-axis {
     text {
-      transform: translate(-22px, -2px);
+      transform: translate(-2px, -2px);
+      text-anchor: end;
     }
   }
 }

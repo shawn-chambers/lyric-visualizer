@@ -2,11 +2,12 @@ import React, { useContext } from 'react';
 import * as d3 from 'd3';
 import { AppContext } from '../context/AppContext';
 import { useD3 } from '../hooks/useD3';
+import { colorArray } from '../utils';
 
 const CircleBarChart = () => {
   const { wordsByYear } = useContext(AppContext);
 
-  const width = 960,
+  const width = 600,
     height = 500,
     chartRadius = height / 2 - 40;
 
@@ -20,7 +21,7 @@ const CircleBarChart = () => {
       if (wordsByYear.length) {
         // const color = d3.scaleOrdinal(d3.schemeCategory10);
         const color = d3.scaleOrdinal().domain(data)
-        .range(["#011e21", "#02363c", "#044b52", "#0c626b", "#157680", "#24919c", "#36aebb", "#48c3d0", "#62bac3", "#8aebf5", "#b6f8ff"]);
+          .range(colorArray);
 
         const PI = Math.PI,
           arcMinRadius = 10,
@@ -44,6 +45,29 @@ const CircleBarChart = () => {
           .startAngle(0)
           .endAngle((d, i) => scale(d))
 
+
+        const arialAxis = (g) => {
+          g.selectAll('*').remove();
+
+          let group = g
+            .attr('transform', 'translate(' + width / 2 + ',' + height / 2 + ')')
+            .selectAll('g')
+            .data(ticks)
+            .join('g')
+            .attr('transform', d => 'rotate(' + (rad2deg(scale(d)) - 90) + ')')
+          group.append('line')
+            .attr('x2', chartRadius);
+          group.append('text')
+            .attr('x', chartRadius + 10)
+            .style('text-anchor', d => (scale(d) >= PI && scale(d) < 2 * PI ? 'end' : null))
+            .attr('transform', d => 'rotate(' + (90 - rad2deg(scale(d))) + ',' + (chartRadius + 10) + ',0)')
+            .text(d => d);
+
+          return group;
+        }
+
+        svg.select('.a-axis').call(arialAxis);
+
         const radialAxis = (g) =>
           g
             .attr('transform', 'translate(' + width / 2 + ',' + height / 2 + ')')
@@ -59,34 +83,13 @@ const CircleBarChart = () => {
                 .join('text')
                 .attr('x', labelPadding)
                 .attr('y', (d, i) => -getOuterRadius(i) + arcPadding)
-                .style('z-index', '5')
+                .style('text-anchor', 'end')
+                .style('font-family', "'Roboto', sans-serif")
+                .style('font-size', '14px')
                 .text(d => d.word)
             )
 
         svg.select('.r-axis').call(radialAxis);
-
-        const arialAxis = (g) => {
-          g.selectAll('*').remove();
-          let group = g
-            .attr('transform', 'translate(' + width / 2 + ',' + height / 2 + ')')
-            .selectAll('g')
-            .data(ticks)
-            .join('g')
-            .attr('transform', d => 'rotate(' + (rad2deg(scale(d)) - 90) + ')')
-
-          group.append('line')
-            .attr('x2', chartRadius);
-
-          group.append('text')
-            .attr('x', chartRadius + 10)
-            .style('text-anchor', d => (scale(d) >= PI && scale(d) < 2 * PI ? 'end' : null))
-            .attr('transform', d => 'rotate(' + (90 - rad2deg(scale(d))) + ',' + (chartRadius + 10) + ',0)')
-            .text(d => d);
-
-          return group;
-        }
-
-        svg.select('.a-axis').call(arialAxis);
 
         svg
           .select('.data')
@@ -100,47 +103,6 @@ const CircleBarChart = () => {
           .delay((d, i) => i * 200)
           .duration(1000)
           .attrTween('d', arcTween)
-
-        // const arcs = (g) => {
-        //   g.selectAll('*').remove();
-        //   let group = g
-        //     .attr('transform', 'translate(' + width / 2 + ',' + height / 2 + ')')
-        //     .call(g =>
-        //       g
-        //         // .append('path')
-        //         .selectAll('path')
-        //         .data(data)
-        //         .enter().insert('path')
-        //         .attr('class', 'arc')
-        //         .style('fill', (d, i) => color(i))
-        //         .transition()
-        //         .delay((d, i) => i * 200)
-        //         .duration(1000)
-        //         .attrTween('d', arcTween)
-        //     )
-
-        //   return group;
-        // }
-
-
-
-
-        // svg.select('.data').call(arcs);
-
-
-        //data arcs
-        // let arcs = svg.append('g')
-        //   .attr('class', 'data')
-        //   .selectAll('path')
-        //   .data(data)
-        //   .enter().append('path')
-        //   .attr('class', 'arc')
-        //   .style('fill', (d, i) => color(i))
-
-        // arcs.transition()
-        //   .delay((d, i) => i * 200)
-        //   .duration(1000)
-        //   .attrTween('d', arcTween);
 
 
         function arcTween(d, i) {
@@ -165,7 +127,6 @@ const CircleBarChart = () => {
 
   return (
     <div className='circle-chart'>
-      {/* {console.log('data for chart -->', data)} */}
       <svg
         ref={ref}
         style={{
@@ -174,8 +135,8 @@ const CircleBarChart = () => {
         }}
       >
         <g className="data" />
-        <g className="r-axis axis" />
         <g className="a-axis axis" />
+        <g className="r-axis axis" />
       </svg>
     </div>
   )

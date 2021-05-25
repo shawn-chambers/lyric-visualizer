@@ -113,15 +113,21 @@ p {
   transition: visibility 2s, opacity 0.5s linear; }
 
 .circle-chart {
-  transition: all 2s ease; }
+  transition: all 2s ease;
+  display: flex;
+  justify-content: center; }
   .circle-chart circle {
     fill: none; }
   .circle-chart .axis line,
   .circle-chart .axis circle {
-    stroke: #cccccc;
-    stroke-width: 1px; }
+    stroke: #c9cbce;
+    stroke-width: 3px; }
+  .circle-chart text {
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px; }
   .circle-chart .r-axis text {
-    transform: translate(-22px, -2px); }
+    transform: translate(-7px, -2px);
+    text-anchor: end; }
 
 .details {
   width: fit-content;
