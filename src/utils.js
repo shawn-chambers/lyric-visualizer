@@ -70,7 +70,7 @@ export const leastSquares = (xSeries, ySeries) => {
 
 export const filterWordsByYear = (words) => {
   let filtered = words.filter((wordObj) => {
-    if (wordObj.word.length > 2) {
+    if (wordObj.word.length > 2 && wordObj.word !== 'ooh' && wordObj.word !== 'chh') {
       return wordObj;
     } 
   }).map((wordObj) => {
@@ -128,6 +128,9 @@ export const filterWordsByYear = (words) => {
     }
     if (wordObj.word === 'somewher') {
       wordObj = {...wordObj, word: 'somewhere'}
+    }
+    if (wordObj.word === 'ain') {
+      wordObj = {...wordObj, word: "ain't"}
     }
     return wordObj;
   })
