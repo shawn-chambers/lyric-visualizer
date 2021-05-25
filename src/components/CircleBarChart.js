@@ -11,18 +11,16 @@ const CircleBarChart = () => {
     chartRadius = height / 2 - 40;
 
   let data = wordsByYear.filter((el, i) => {
-    if (i < 5) return el;
+    if (i < 10) return el;
   })
 
   const ref = useD3(
     (svg) => {
 
       if (wordsByYear.length) {
-        const color = d3.scaleOrdinal(d3.schemeCategory10);
-
-        let g = svg
-          .append('g')
-          .attr('transform', 'translate(' + width / 2 + ',' + height / 2 + ')');
+        // const color = d3.scaleOrdinal(d3.schemeCategory10);
+        const color = d3.scaleOrdinal().domain(data)
+        .range(["#011e21", "#02363c", "#044b52", "#0c626b", "#157680", "#24919c", "#36aebb", "#48c3d0", "#62bac3", "#8aebf5", "#b6f8ff"]);
 
         const PI = Math.PI,
           arcMinRadius = 10,
@@ -46,69 +44,108 @@ const CircleBarChart = () => {
           .startAngle(0)
           .endAngle((d, i) => scale(d))
 
+        const radialAxis = (g) =>
+          g
+            .attr('transform', 'translate(' + width / 2 + ',' + height / 2 + ')')
+            .call(g =>
+              g
+                .append('circle')
+                .attr('r', (d, i) => getOuterRadius(i) + arcPadding)
+            )
+            .call(g =>
+              g
+                .selectAll('text')
+                .data(data)
+                .join('text')
+                .attr('x', labelPadding)
+                .attr('y', (d, i) => -getOuterRadius(i) + arcPadding)
+                .style('z-index', '5')
+                .text(d => d.word)
+            )
 
-        let radialAxis = g.append('g')
-          .attr('class', 'r-axis')
-          .selectAll('g')
-          .data(data)
-          .enter().append('g');
+        svg.select('.r-axis').call(radialAxis);
 
-        radialAxis.append('circle')
-          .attr('r', (d, i) => getOuterRadius(i) + arcPadding);
+        const arialAxis = (g) => {
+          g.selectAll('*').remove();
+          let group = g
+            .attr('transform', 'translate(' + width / 2 + ',' + height / 2 + ')')
+            .selectAll('g')
+            .data(ticks)
+            .join('g')
+            .attr('transform', d => 'rotate(' + (rad2deg(scale(d)) - 90) + ')')
 
-        radialAxis.append('text')
-          .attr('x', labelPadding)
-          .attr('y', (d, i) => -getOuterRadius(i) + arcPadding)
-          .text(d => d.word);
+          group.append('line')
+            .attr('x2', chartRadius);
 
-        let axialAxis = g.append('g')
-          .attr('class', 'a-axis')
-          .selectAll('g')
-          .data(ticks)
-          .enter().append('g')
-          .attr('transform', d => 'rotate(' + (rad2deg(scale(d)) - 90) + ')');
+          group.append('text')
+            .attr('x', chartRadius + 10)
+            .style('text-anchor', d => (scale(d) >= PI && scale(d) < 2 * PI ? 'end' : null))
+            .attr('transform', d => 'rotate(' + (90 - rad2deg(scale(d))) + ',' + (chartRadius + 10) + ',0)')
+            .text(d => d);
 
-        axialAxis.append('line')
-          .attr('x2', chartRadius);
+          return group;
+        }
 
-        axialAxis.append('text')
-          .attr('x', chartRadius + 10)
-          .style('text-anchor', d => (scale(d) >= PI && scale(d) < 2 * PI ? 'end' : null))
-          .attr('transform', d => 'rotate(' + (90 - rad2deg(scale(d))) + ',' + (chartRadius + 10) + ',0)')
-          .text(d => d);
+        svg.select('.a-axis').call(arialAxis);
 
-        //data arcs
-        let arcs = g.append('g')
-          .attr('class', 'data')
+        svg
+          .select('.data')
+          .attr('transform', 'translate(' + width / 2 + ',' + height / 2 + ')')
           .selectAll('path')
           .data(data)
-          .enter().append('path')
+          .join('path')
           .attr('class', 'arc')
           .style('fill', (d, i) => color(i))
-
-        arcs.transition()
+          .transition()
           .delay((d, i) => i * 200)
           .duration(1000)
-          .attrTween('d', arcTween);
+          .attrTween('d', arcTween)
 
-        // arcs.on('mousemove', showTooltip)
-        // arcs.on('mouseout', hideTooltip)
+        // const arcs = (g) => {
+        //   g.selectAll('*').remove();
+        //   let group = g
+        //     .attr('transform', 'translate(' + width / 2 + ',' + height / 2 + ')')
+        //     .call(g =>
+        //       g
+        //         // .append('path')
+        //         .selectAll('path')
+        //         .data(data)
+        //         .enter().insert('path')
+        //         .attr('class', 'arc')
+        //         .style('fill', (d, i) => color(i))
+        //         .transition()
+        //         .delay((d, i) => i * 200)
+        //         .duration(1000)
+        //         .attrTween('d', arcTween)
+        //     )
+
+        //   return group;
+        // }
+
+
+
+
+        // svg.select('.data').call(arcs);
+
+
+        //data arcs
+        // let arcs = svg.append('g')
+        //   .attr('class', 'data')
+        //   .selectAll('path')
+        //   .data(data)
+        //   .enter().append('path')
+        //   .attr('class', 'arc')
+        //   .style('fill', (d, i) => color(i))
+
+        // arcs.transition()
+        //   .delay((d, i) => i * 200)
+        //   .duration(1000)
+        //   .attrTween('d', arcTween);
+
 
         function arcTween(d, i) {
           let interpolate = d3.interpolate(0, d.nentry);
-          console.log('interpolate', interpolate)
           return t => arc(interpolate(t), i);
-        }
-
-        function showTooltip(d) {
-          tooltip.style('left', (d3.event.pageX + 10) + 'px')
-            .style('top', (d3.event.pageY - 25) + 'px')
-            .style('display', 'inline-block')
-            .html(d.nentry);
-        }
-
-        function hideTooltip() {
-          tooltip.style('display', 'none');
         }
 
         function rad2deg(angle) {
@@ -128,7 +165,7 @@ const CircleBarChart = () => {
 
   return (
     <div className='circle-chart'>
-      {console.log('data for chart -->', data)}
+      {/* {console.log('data for chart -->', data)} */}
       <svg
         ref={ref}
         style={{
@@ -136,6 +173,9 @@ const CircleBarChart = () => {
           height
         }}
       >
+        <g className="data" />
+        <g className="r-axis axis" />
+        <g className="a-axis axis" />
       </svg>
     </div>
   )

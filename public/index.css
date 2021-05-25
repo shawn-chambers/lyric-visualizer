@@ -112,11 +112,16 @@ p {
   z-index: 100;
   transition: visibility 2s, opacity 0.5s linear; }
 
-.circle-chart circle {
-  fill: none; }
-
-.circle-chart .r-axis text {
-  transform: translate(-22px, 7px); }
+.circle-chart {
+  transition: all 2s ease; }
+  .circle-chart circle {
+    fill: none; }
+  .circle-chart .axis line,
+  .circle-chart .axis circle {
+    stroke: #cccccc;
+    stroke-width: 1px; }
+  .circle-chart .r-axis text {
+    transform: translate(-22px, -2px); }
 
 .details {
   width: fit-content;

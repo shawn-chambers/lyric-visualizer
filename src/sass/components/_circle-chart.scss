@@ -1,11 +1,18 @@
 .circle-chart {
+  transition: all 2s ease;
   circle {
     fill: none;
   }
 
+  .axis line,
+  .axis circle {
+    stroke: #cccccc;
+    stroke-width: 1px;
+  }
+
   .r-axis {
     text {
-      transform: translate(-22px, 7px);
+      transform: translate(-22px, -2px);
     }
   }
 }
