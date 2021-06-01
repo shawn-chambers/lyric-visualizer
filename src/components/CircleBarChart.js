@@ -19,7 +19,6 @@ const CircleBarChart = () => {
     (svg) => {
 
       if (wordsByYear.length) {
-        // const color = d3.scaleOrdinal(d3.schemeCategory10);
         const color = d3.scaleOrdinal().domain(data)
           .range(colorArray);
 
@@ -35,7 +34,7 @@ const CircleBarChart = () => {
 
         let ticks = scale.ticks(numTicks).slice(0, -1);
         let keys = data.map((d, i) => d.word);
-        //number of arcs
+
         const numArcs = keys.length;
         const arcWidth = (chartRadius - arcMinRadius - numArcs * arcPadding) / numArcs;
 
@@ -60,7 +59,7 @@ const CircleBarChart = () => {
           group.append('text')
             .attr('x', chartRadius + 10)
             .style('text-anchor', d => (scale(d) >= PI && scale(d) < 2 * PI ? 'end' : null))
-            .attr('transform', d => 'rotate(' + (90 - rad2deg(scale(d))) + ',' + (chartRadius + 10) + ',0)')
+            .attr('transform', d => 'rotate(' + (90 - rad2deg(scale(d))) + ',' + (chartRadius + 10) + ',0) translate(0, 5)')
             .text(d => d);
 
           return group;

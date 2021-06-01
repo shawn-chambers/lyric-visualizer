@@ -14,7 +14,7 @@ const YearSearchBar = () => {
     } else {
       setSelected('');
     }
-    if (e.target.innerText !== 'Select a Year...') {
+    if (e.target.innerText !== 'Select a Year...' && Number(e.target.innerText) !== year) {
       setYear(Number(e.target.innerText))
     }
   }
@@ -43,9 +43,9 @@ const YearSearchBar = () => {
 
   return (
     <div className={`container ${selected}`}>
-      <div className={`select`} onChange={(e) => setQueryYear(e.target.value)}
+      <div className={'select'} onChange={(e) => setQueryYear(e.target.value)}
         onClick={handleSelected}>
-        Select a Year...</div>
+        {year ? year : 'Select a Year...'}</div>
       <ul style={handleDisplay(selected)} ref={dropDownRef}>
         {makeYears(1970, 2020).map(year => {
           return (

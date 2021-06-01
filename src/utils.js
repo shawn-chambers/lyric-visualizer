@@ -70,7 +70,7 @@ export const leastSquares = (xSeries, ySeries) => {
 
 export const filterWordsByYear = (words) => {
   let filtered = words.filter((wordObj) => {
-    if (wordObj.word.length > 2 && wordObj.word !== 'ooh' && wordObj.word !== 'chh') {
+    if (wordObj.word.length > 2 && wordObj.word !== 'ooh' && wordObj.word !== 'chh' && wordObj.word !== 'doo') {
       return wordObj;
     } 
   }).map((wordObj) => {
@@ -137,4 +137,4 @@ export const filterWordsByYear = (words) => {
   return filtered;
 }
 
-export const colorArray = ["#216171", "#127c88", "#3a9eac", "#3ea7b5", "#42b1bf", "#49c3d0", "#44cadd", "#42cde3", "#3fd1e9", "#3ad8f5", "#37ddff"]
+export const colorArray = ["#127c88", "#127c88", "#158492", "#198e9e", "#1c97a9", "#1f9fb3", "#23aac1", "#27b4cd", "#2abcd7", "#2dc5e2", "#32d0ef", "#37ddff"]

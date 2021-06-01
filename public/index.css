@@ -126,7 +126,7 @@ p {
     font-family: 'Roboto', sans-serif;
     font-size: 14px; }
   .circle-chart .r-axis text {
-    transform: translate(-7px, -2px);
+    transform: translate(-2px, -2px);
     text-anchor: end; }
 
 .details {
