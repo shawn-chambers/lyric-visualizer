@@ -103,6 +103,26 @@ const CircleBarChart = () => {
           .duration(1000)
           .attrTween('d', arcTween)
 
+        let arcs = svg.selectAll('.arc');
+
+        let popUp = d3.select('body').append('div').attr('class', 'pop_up');
+
+        function showTooltip(event, d) {
+          popUp.style('left', (event.pageX + 10) + 'px')
+            .style('top', (event.pageY - 25) + 'px')
+            .style('display', 'inline-block')
+            .style('position', 'absolute')
+            .style('opacity', 1)
+            .html(d.nentry);
+        }
+
+        function hideTooltip() {
+          popUp.style('opacity', 0);
+        }
+
+        arcs.on('mousemove', (e, d) => showTooltip(e, d))
+        arcs.on('mouseout', hideTooltip)
+
 
         function arcTween(d, i) {
           let interpolate = d3.interpolate(0, d.nentry);

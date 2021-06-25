@@ -7,6 +7,13 @@
     fill: none;
   }
 
+  path.arc {
+    transition: opacity 0.5s linear;
+    &:hover {
+      opacity: 0.7;
+    }
+  }
+
   .axis line,
   .axis circle {
     stroke: $color-background;
@@ -14,10 +21,10 @@
   }
 
   text {
-    font-family: 'Roboto', sans-serif;
+    font-family: "Roboto", sans-serif;
     font-size: 14px;
   }
-  
+
   .r-axis {
     text {
       transform: translate(-2px, -2px);
