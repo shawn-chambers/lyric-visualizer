@@ -105,8 +105,8 @@ const CircleBarChart = () => {
 
         let arcs = svg.selectAll('.arc');
 
-        let popUp = d3.select('body').append('div').attr('class', 'pop_up');
-
+        let popUp = d3.select('body').append('div').attr('class', 'pop_up').style('display', 'none');
+        
         function showTooltip(event, d) {
           popUp.style('left', (event.pageX + 10) + 'px')
             .style('top', (event.pageY - 25) + 'px')
