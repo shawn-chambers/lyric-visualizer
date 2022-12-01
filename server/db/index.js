@@ -5,7 +5,7 @@ require('dotenv').config();
 // const client = new Client()
 // Notes: Prod Heroku DB
 const client = new Client({
-  connectionString: process.env.DATABASE_URL,
+  connectionString: process.env.RENDER_DB,
   ssl: {
     rejectUnauthorized: false
   }
@@ -13,9 +13,9 @@ const client = new Client({
 
 client.connect()
   .then(() => {
-    // console.log('successful postgress connection');
+    console.log('successful postgress connection');
     // Notes: Prod Heroku DB
-    console.log(`successful postgress connection to ${process.env.DATABASE_URL}`);
+    // console.log(`successful postgress connection to ${process.env.RENDER_DB}`);
   })
   .catch(() => {
     console.error('unsuccessful connection');
