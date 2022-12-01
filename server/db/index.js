@@ -1,17 +1,17 @@
-const { Client } = require('pg');
+const { Pool } = require('pg');
 require('dotenv').config();
 
 
 // const client = new Client()
 // Notes: Prod Restore DB
-const client = new Client({
+const pool = new Pool({
   connectionString: process.env.RENDER_DB,
   ssl: {
     rejectUnauthorized: false
   }
 });
 
-client.connect()
+pool.connect()
   .then(() => {
     // console.log('successful postgress connection');
     // Notes: Prod Restore DB
@@ -23,5 +23,5 @@ client.connect()
 
 
 module.exports = {
-  db: client
+  db: pool
 }
