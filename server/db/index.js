@@ -17,8 +17,8 @@ client.connect()
     // Notes: Prod Restore DB
     console.log(`successful postgress connection to ${process.env.RENDER_DB}`);
   })
-  .catch(() => {
-    console.error('unsuccessful connection');
+  .catch((err) => {
+    console.error('unsuccessful connection:', err);
   });
 
 
