@@ -18,7 +18,7 @@ pool.connect()
     console.log(`successful postgress connection to ${process.env.RENDER_DB}`);
   })
   .catch((err) => {
-    console.error('unsuccessful connection:', err);
+    console.error('unsuccessful connection:', err, process.env.RENDER_DB);
   });
 
 
