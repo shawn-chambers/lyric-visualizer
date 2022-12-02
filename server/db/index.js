@@ -5,7 +5,7 @@ require('dotenv').config();
 // const client = new Client()
 // Notes: Prod Restore DB
 const pool = new Pool({
-  connectionString: 'postgres://shawn_chambers:14VIF8eXUfHmRmqmer2VVaIsQYBwDGv0@dpg-ce4g7u82i3mmvv4dpgo0-a.oregon-postgres.render.com/lyrics',
+  connectionString: String(process.env.RENDER_DB),
   ssl: {
     rejectUnauthorized: false
   }
