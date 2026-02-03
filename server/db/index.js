@@ -1,4 +1,4 @@
-const { Pool } = require('pg');
+const { Client } = require('pg');
 require('dotenv').config();
 
 
@@ -11,17 +11,17 @@ const client = new Client({
   }
 });
 
-pool.connect()
+client.connect()
   .then(() => {
     console.log('successful postgress connection');
     // Notes: Prod Heroku DB
     // console.log(`successful postgress connection to ${process.env.RENDER_DB}`);
   })
-  .catch((err) => {
-    console.error('unsuccessful connection:', err);
+  .catch(() => {
+    console.error('unsuccessful connection');
   });
 
 
 module.exports = {
-  db: pool
+  db: client
 }
