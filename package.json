@@ -8,7 +8,7 @@
     "start:dev": "NODE_ENV=development nodemon server/index.js",
     "build:dev": "webpack --watch",
     "build:prod": "webpack --config webpack.prod.js",
-    "compile:sass": "node-sass src/sass/main.scss public/index.css -w",
+    "compile:sass": "sass src/sass/main.scss public/index.css -w",
     "bundle-report": "webpack-bundle-analyzer --port 4200 compilation-stats.json",
     "heroku-postbuild": "webpack --config webpack.prod.js"
   },
@@ -40,19 +40,19 @@
     "@babel/preset-env": "^7.12.11",
     "@babel/preset-react": "^7.12.10",
     "babel-loader": "^8.2.2",
-    "compression-webpack-plugin": "^7.1.2",
+    "compression-webpack-plugin": "^11.1.0",
     "file-loader": "^6.2.0",
     "image-minimizer-webpack-plugin": "^2.2.0",
     "imagemin-jpegtran": "^7.0.0",
     "imagemin-mozjpeg": "^9.0.0",
-    "node-sass": "^5.0.0",
     "resize-observer-polyfill": "^1.5.1",
-    "webpack": "^5.12.3",
+    "sass": "^1.97.3",
+    "webpack": "^5.104.1",
     "webpack-bundle-analyzer": "^4.4.2",
     "webpack-cli": "^4.3.1",
-    "webpack-merge": "^4.2.2"
+    "webpack-merge": "^6.0.1"
   },
   "engines": {
-    "node": ">=9.0.0 <11"
+    "node": ">=18.0.0"
   }
 }
