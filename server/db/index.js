@@ -1,4 +1,4 @@
-const { Pool } = require('pg');
+const { Client } = require('pg');
 require('dotenv').config();
 
 
@@ -11,7 +11,7 @@ const client = new Client({
   }
 });
 
-pool.connect()
+client.connect()
   .then(() => {
     // console.log('successful postgress connection');
     // Notes: Render DB connection
@@ -23,5 +23,5 @@ pool.connect()
 
 
 module.exports = {
-  db: pool
+  db: client
 }
