@@ -3,9 +3,9 @@ require('dotenv').config();
 
 
 // const client = new Client()
-// Notes: Prod Restore DB
-const pool = new Pool({
-  connectionString: String(process.env.RENDER_DB),
+// Notes: Render DB connection
+const client = new Client({
+  connectionString: process.env.RENDER_DB,
   ssl: {
     rejectUnauthorized: false
   }
@@ -13,8 +13,9 @@ const pool = new Pool({
 
 pool.connect()
   .then(() => {
-    // Notes: Prod Restore DB
-    console.log('successful postgress connection');
+    // console.log('successful postgress connection');
+    // Notes: Render DB connection
+    console.log(`successful postgress connection to ${process.env.RENDER_DB}`);
   })
   .catch((err) => {
     console.error('unsuccessful connection:', err);
