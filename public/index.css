@@ -3,27 +3,32 @@
 *::before {
   margin: 0;
   padding: 0;
-  box-sizing: inherit; }
+  box-sizing: inherit;
+}
 
 html {
-  font-size: 62.5%; }
+  font-size: 62.5%;
+}
 
 body {
   box-sizing: border-box;
   background-color: #c9cbce;
   padding: 0 0 3rem 0;
   font-family: sans-serif;
-  color: #000606; }
+  color: #000606;
+}
 
 button {
-  background-color: #efefef; }
+  background-color: #efefef;
+}
 
 p {
   font-size: 1.7rem;
   margin: 2rem auto;
   max-width: 70rem;
-  font-family: 'Roboto', sans-serif;
-  line-height: 1.5; }
+  font-family: "Roboto", sans-serif;
+  line-height: 1.5;
+}
 
 .billboard {
   height: 90vh;
@@ -34,47 +39,60 @@ p {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  margin-bottom: 6rem; }
-  .billboard__backdrop {
-    width: 100vw;
-    height: auto; }
-  .billboard__text {
-    padding: 1.5rem 1rem;
-    position: relative;
-    color: white;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center; }
-    .billboard__text--header {
-      font-family: "Quattrocento", serif;
-      font-size: 20rem;
-      text-shadow: 8px 7px 1px #000606; }
-      .billboard__text--header .mark {
-        color: white; }
-        .billboard__text--header .mark::before {
-          content: ".";
-          position: absolute;
-          font-size: 103%;
-          margin-left: 1.19rem;
-          line-height: 1.07;
-          color: #48c3d0; }
-    .billboard__text--sub-header {
-      font-family: 'Raleway', sans-serif;
-      font-size: 4.5rem;
-      max-width: 75%;
-      font-weight: 700;
-      text-shadow: 3px 3px 1px #000606; }
-    .billboard__text--author {
-      font-family: 'Raleway', sans-serif;
-      margin: 1rem;
-      font-size: 1.5rem;
-      max-width: 75%;
-      font-weight: 700;
-      text-shadow: 1px 1px 1px #000606; }
-      .billboard__text--author a {
-        text-decoration: underline;
-        color: #48c3d0; }
+  margin-bottom: 6rem;
+}
+.billboard__backdrop {
+  width: 100vw;
+  height: auto;
+}
+.billboard__text {
+  padding: 1.5rem 1rem;
+  position: relative;
+  color: white;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.billboard__text--header {
+  font-family: "Quattrocento", serif;
+  font-size: 20rem;
+  text-shadow: 8px 7px 1px #000606;
+}
+.billboard__text--header .mark {
+  position: relative;
+  color: white;
+}
+.billboard__text--header .mark::before {
+  content: "";
+  position: absolute;
+  width: 0.14em;
+  height: 0.14em;
+  background-color: #48c3d0;
+  border-radius: 50%;
+  bottom: 0.25em;
+  left: 44.4%;
+  transform: translateX(-50%);
+}
+.billboard__text--sub-header {
+  font-family: "Raleway", sans-serif;
+  font-size: 4.5rem;
+  max-width: 75%;
+  font-weight: 700;
+  text-shadow: 3px 3px 1px #000606;
+}
+.billboard__text--author {
+  font-family: "Raleway", sans-serif;
+  margin: 1rem;
+  font-size: 1.5rem;
+  max-width: 75%;
+  font-weight: 700;
+  text-shadow: 1px 1px 1px #000606;
+}
+.billboard__text--author a {
+  text-decoration: underline;
+  color: #48c3d0;
+}
 
 .chart-container {
   background-color: white;
@@ -85,105 +103,136 @@ p {
   border-radius: 4px;
   justify-content: center;
   transition: all 2s ease;
-  box-shadow: 0 2px 4px rgba(0, 6, 6, 0.2); }
-  .chart-container .plot-area {
-    transition: all 2s ease; }
-  .chart-container svg {
-    transition: all 2s ease;
-    fill: #48c3d0; }
-  .chart-container .bar {
-    transition: y 2s ease, fill 0.8s ease, height 2s ease;
-    cursor: pointer; }
-    .chart-container .bar:hover {
-      fill: #127c88; }
+  box-shadow: 0 2px 4px rgba(0, 6, 6, 0.2);
+}
+.chart-container .plot-area {
+  transition: all 2s ease;
+}
+.chart-container svg {
+  transition: all 2s ease;
+  fill: #48c3d0;
+}
+.chart-container .bar {
+  transition: y 2s ease, fill 0.8s ease, height 2s ease;
+  cursor: pointer;
+}
+.chart-container .bar:hover {
+  fill: #127c88;
+}
 
 .circle-chart {
   transition: all 2s ease;
   display: flex;
-  justify-content: center; }
-  .circle-chart circle {
-    fill: none; }
-  .circle-chart path.arc {
-    transition: opacity 0.5s linear; }
-    .circle-chart path.arc:hover {
-      opacity: 0.7; }
-  .circle-chart .axis line,
-  .circle-chart .axis circle {
-    stroke: #c9cbce;
-    stroke-width: 3px; }
-  .circle-chart text {
-    font-family: "Roboto", sans-serif;
-    font-size: 14px; }
-  .circle-chart .r-axis text {
-    transform: translate(-2px, -2px);
-    text-anchor: end; }
+  justify-content: center;
+}
+.circle-chart circle {
+  fill: none;
+}
+.circle-chart path.arc {
+  transition: opacity 0.5s linear;
+}
+.circle-chart path.arc:hover {
+  opacity: 0.7;
+}
+.circle-chart .axis line,
+.circle-chart .axis circle {
+  stroke: #c9cbce;
+  stroke-width: 3px;
+}
+.circle-chart text {
+  font-family: "Roboto", sans-serif;
+  font-size: 14px;
+}
+.circle-chart .r-axis text {
+  transform: translate(-2px, -2px);
+  text-anchor: end;
+}
 
 .details {
   width: fit-content;
   width: -moz-fit-content;
   width: -webkit-fit-content;
   margin: 2rem auto 2rem auto;
-  font-family: "Montserrat", sans-serif; }
-  .details .total {
-    font-weight: 700;
-    font-size: 5rem;
-    text-align: center; }
-  .details .selection {
-    font-size: 2.5rem; }
-    .details .selection span {
-      position: relative;
-      font-size: 2rem;
-      font-family: "Montserrat", sans-serif;
-      font-style: italic;
-      font-weight: 200;
-      bottom: .2rem; }
-  .details .keyword {
-    text-decoration: underline;
-    text-decoration-color: #48c3d0; }
+  font-family: "Montserrat", sans-serif;
+}
+.details .total {
+  font-weight: 700;
+  font-size: 5rem;
+  text-align: center;
+}
+.details .selection {
+  font-size: 2.5rem;
+}
+.details .selection span {
+  position: relative;
+  font-size: 2rem;
+  font-family: "Montserrat", sans-serif;
+  font-style: italic;
+  font-weight: 200;
+  bottom: 0.2rem;
+}
+.details .keyword {
+  text-decoration: underline;
+  text-decoration-color: #48c3d0;
+}
 
 .tools-container {
   margin: 2rem auto 4rem auto;
   width: fit-content;
   width: -moz-fit-content;
-  width: -webkit-fit-content; }
+  width: -webkit-fit-content;
+}
 
 .lyrics {
   font-family: "Montserrat", sans-serif;
   transition: all 1s ease;
+}
+@media not all and (min-resolution: 0.001dpcm) {
+  @supports (-webkit-appearance: none) {
+    .lyrics {
+      -webkit-transition: none;
+    }
+  }
+}
+.lyrics {
   width: 150%;
   position: relative;
-  right: 25%; }
-  @media not all and (min-resolution: 0.001dpcm) {
-    @supports (-webkit-appearance: none) {
-      .lyrics {
-        -webkit-transition: none; } } }
-  .lyrics__text {
-    font-size: 1.1rem;
-    margin: 1rem 0; }
-  .lyrics b {
-    font-weight: 700; }
+  right: 25%;
+}
+.lyrics__text {
+  font-size: 1.1rem;
+  margin: 1rem 0;
+}
+.lyrics b {
+  font-weight: 700;
+}
 
 .search {
   margin: 5rem 0 1rem 0;
   width: fit-content;
   width: -moz-fit-content;
-  box-shadow: 0 2px 4px rgba(0, 6, 6, 0.2); }
-  .search input, .search button {
-    font-size: 1.4rem;
-    font-family: 'Roboto', sans-serif;
-    border: none;
-    height: 4rem;
-    padding: 1rem; }
-  .search input {
-    border-radius: 4px 0 0 4px;
-    width: 15rem; }
-  .search button {
-    border-radius: 0 4px 4px 0;
-    cursor: pointer;
-    transition: all .2s ease; }
-    .search button:hover {
-      background-color: #48c3d0;
-      color: white; }
+  box-shadow: 0 2px 4px rgba(0, 6, 6, 0.2);
+}
+.search input, .search button {
+  font-size: 1.4rem;
+  font-family: "Roboto", sans-serif;
+  border: none;
+  height: 4rem;
+  padding: 1rem;
+}
+.search input {
+  border-radius: 4px 0 0 4px;
+  width: 15rem;
+}
+.search button {
+  border-radius: 0 4px 4px 0;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.search button:hover {
+  background-color: #48c3d0;
+  color: white;
+}
 
 .container {
   user-select: none;
@@ -196,56 +245,65 @@ p {
   color: #000606;
   font-size: 1.4rem;
   font-family: "Roboto", sans-serif;
-  max-height: 4rem; }
-  .container .select,
-  .container button,
-  .container ul {
-    padding: 1rem;
-    box-shadow: 0 2px 4px rgba(0, 6, 6, 0.2); }
-  .container .select {
-    width: 100%;
-    background-color: white;
-    color: #000606;
-    height: 4rem;
-    border-radius: 4px;
-    color: #757575;
-    display: flex;
-    align-items: center;
-    transition: all 1.5s linear; }
-  .container button {
-    font-size: 1.4rem;
-    font-family: "Roboto", sans-serif;
-    border: none;
-    height: 4rem;
-    padding: 1rem; }
-  .container ul {
-    position: relative;
-    display: block;
-    list-style: none;
-    width: 100%;
-    overflow: hidden;
-    overflow-y: auto;
-    z-index: 2;
-    height: 0rem;
-    padding: 0;
-    max-height: 0rem;
-    border-radius: 0 0 4px 4px;
-    background-color: #efefef;
-    transition: all 0.5s ease, border-radius; }
-    .container ul li {
-      width: 100%;
-      margin: .5rem 0;
-      text-align: center; }
-  .container button {
-    border-radius: 0 4px 4px 0;
-    cursor: pointer;
-    transition: all 0.2s ease; }
-    .container button:hover {
-      background-color: #48c3d0;
-      color: white; }
+  max-height: 4rem;
+}
+.container .select,
+.container button,
+.container ul {
+  padding: 1rem;
+  box-shadow: 0 2px 4px rgba(0, 6, 6, 0.2);
+}
+.container .select {
+  width: 100%;
+  background-color: white;
+  color: #000606;
+  height: 4rem;
+  border-radius: 4px;
+  color: #757575;
+  display: flex;
+  align-items: center;
+  transition: all 1.5s linear;
+}
+.container button {
+  font-size: 1.4rem;
+  font-family: "Roboto", sans-serif;
+  border: none;
+  height: 4rem;
+  padding: 1rem;
+}
+.container ul {
+  position: relative;
+  display: block;
+  list-style: none;
+  width: 100%;
+  overflow: hidden;
+  overflow-y: auto;
+  z-index: 2;
+  height: 0rem;
+  padding: 0;
+  max-height: 0rem;
+  border-radius: 0 0 4px 4px;
+  background-color: #efefef;
+  transition: all 0.5s ease, border-radius;
+}
+.container ul li {
+  width: 100%;
+  margin: 0.5rem 0;
+  text-align: center;
+}
+.container button {
+  border-radius: 0 4px 4px 0;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.container button:hover {
+  background-color: #48c3d0;
+  color: white;
+}
 
 .selected .select {
-  border-radius: 4px 4px 0 0; }
+  border-radius: 4px 4px 0 0;
+}
 
 .songs__list {
   padding: 0;
@@ -255,25 +313,30 @@ p {
   flex-direction: row;
   justify-content: space-evenly;
   max-width: 75vw;
-  margin: 0 auto 4rem auto; }
-  .songs__list .selected {
-    border: 2px solid #48c3d0; }
-  .songs__list--container {
-    width: 25rem;
-    margin: 1%; }
-  .songs__list--song-container {
-    height: 12rem;
-    margin: 1rem 0;
-    list-style: none;
-    min-width: 30%;
-    box-shadow: 0 2px 4px rgba(0, 6, 6, 0.2);
-    background: white;
-    border-radius: 4px;
-    transition: border 0.2s ease;
-    border: 2px solid white;
-    cursor: pointer; }
-    .songs__list--song-container:hover {
-      border: 2px solid #48c3d0; }
+  margin: 0 auto 4rem auto;
+}
+.songs__list .selected {
+  border: 2px solid #48c3d0;
+}
+.songs__list--container {
+  width: 25rem;
+  margin: 1%;
+}
+.songs__list--song-container {
+  height: 12rem;
+  margin: 1rem 0;
+  list-style: none;
+  min-width: 30%;
+  box-shadow: 0 2px 4px rgba(0, 6, 6, 0.2);
+  background: white;
+  border-radius: 4px;
+  transition: border 0.2s ease;
+  border: 2px solid white;
+  cursor: pointer;
+}
+.songs__list--song-container:hover {
+  border: 2px solid #48c3d0;
+}
 
 .song {
   padding: 1rem;
@@ -283,28 +346,33 @@ p {
   box-sizing: border-box;
   font-size: 1.2rem;
   text-align: right;
-  font-family: "Roboto", sans-serif; }
-  .song__info {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    line-height: 2rem;
-    height: 100%;
-    gap: 0.75rem; }
-    .song__info--title {
-      font-size: 2rem;
-      text-align: left;
-      margin-bottom: 0.6rem; }
-    .song__info--position {
-      font-size: 1rem;
-      text-align: right; }
-    .song__info--artist {
-      font-family: 'Source Serif Pro', serif;
-      font-style: italic;
-      max-width: 85%;
-      font-size: 1.6rem;
-      text-align: left;
-      line-height: 1.7rem; }
+  font-family: "Roboto", sans-serif;
+}
+.song__info {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  line-height: 2rem;
+  height: 100%;
+  gap: 0.75rem;
+}
+.song__info--title {
+  font-size: 2rem;
+  text-align: left;
+  margin-bottom: 0.6rem;
+}
+.song__info--position {
+  font-size: 1rem;
+  text-align: right;
+}
+.song__info--artist {
+  font-family: "Source Serif Pro", serif;
+  font-style: italic;
+  max-width: 85%;
+  font-size: 1.6rem;
+  text-align: left;
+  line-height: 1.7rem;
+}
 
 .tool-tip,
 .pop_up {
@@ -313,16 +381,20 @@ p {
   position: absolute;
   width: 8.5rem;
   height: fit-content;
-  padding: .5rem;
+  padding: 0.5rem;
   font-size: 1.5rem;
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
   background: white;
   border: 1px solid #127c88;
   border-radius: 3px;
   pointer-events: none;
   z-index: 100;
-  transition: visibility 2s, opacity 0.5s linear; }
+  transition: visibility 2s, opacity 0.5s linear;
+}
 
 .pop_up {
   width: 5rem;
-  text-align: center; }
+  text-align: center;
+}
+
+/*# sourceMappingURL=index.css.map */

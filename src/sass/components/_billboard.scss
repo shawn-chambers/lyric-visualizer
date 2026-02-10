@@ -1,3 +1,5 @@
+@use "../abstracts/variables" as *;
+
 .billboard {
   height: 90vh;
   background-size: cover;
@@ -29,28 +31,32 @@
       text-shadow: 8px 7px 1px $color-black;
 
       .mark {
+        position: relative;
         color: $color-primary;
         &::before {
-          content: ".";
+          content: "";
           position: absolute;
-          font-size: 103%;
-          margin-left: 1.19rem;
-          line-height: 1.07;
-          color: $color-secondary;
+          width: 0.14em;
+          height: 0.14em;
+          background-color: #48c3d0;
+          border-radius: 50%;
+          bottom: 0.25em;
+          left: 44.4%;
+          transform: translateX(-50%);
         }
       }
     }
 
     &--sub-header {
-      font-family: 'Raleway', sans-serif;
+      font-family: "Raleway", sans-serif;
       font-size: 4.5rem;
       max-width: 75%;
       font-weight: 700;
       text-shadow: 3px 3px 1px $color-black;
     }
-    
+
     &--author {
-      font-family: 'Raleway', sans-serif;
+      font-family: "Raleway", sans-serif;
       margin: 1rem;
       font-size: 1.5rem;
       max-width: 75%;
