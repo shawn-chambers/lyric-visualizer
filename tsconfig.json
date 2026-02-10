@@ -1,0 +1,12 @@
+{
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "module": "ESNext",
+    "jsx": "react",
+    "outDir": "./dist/src",
+    "rootDir": ".",
+    "baseUrl": "."
+  },
+  "include": ["src/**/*", "shared/**/*"],
+  "exclude": ["node_modules", "server", "dist"]
+}
