@@ -1,7 +1,7 @@
 import { QueryResult } from 'pg';
 
-import { db } from '../index';
 import { Song, WordStats, LyricsRecord } from '../../../shared/types';
+import { db } from '../index';
 
 interface GetLyrics {
   byYear: (year: number) => Promise<QueryResult<WordStats>>;

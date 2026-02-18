@@ -29,7 +29,8 @@ const D3Chart: React.FC = () => {
     (svg) => {
       const height = 500;
       const width = 800;
-      const margin = { top: 20, right: 30, bottom: 40, left: 40 };
+      const isMobile = window.innerWidth < 768;
+      const margin = { top: 20, right: 30, bottom: isMobile ? 60 : 40, left: 40 };
 
       const x = d3
         .scaleBand()
@@ -43,12 +44,13 @@ const D3Chart: React.FC = () => {
         .rangeRound([height - margin.bottom, margin.top]);
 
       const domainExtent = d3.extent(x.domain()) as [string, string];
-      const tickVals = d3.ticks(Number(domainExtent[0]), Number(domainExtent[1]), width / 40).map(String);
+      const allTickVals = d3.ticks(Number(domainExtent[0]), Number(domainExtent[1]), width / 40).map(String);
+      const tickVals = isMobile ? allTickVals.filter((_, i) => i % 2 === 0) : allTickVals;
 
       const xAxis = (g: d3.Selection<SVGGElement, unknown, null, undefined>) =>
         g
           .attr('transform', `translate(0,${height - margin.bottom})`)
-          .style('font-size', '1.4rem')
+          .style('font-size', isMobile ? '1.8rem' : '1.4rem')
           .call(
             d3
               .axisBottom(x)
@@ -57,14 +59,14 @@ const D3Chart: React.FC = () => {
           )
           .selectAll('text')
           .attr('dx', '-23px')
-          .attr('dy', '4px')
+          .attr('dy', isMobile ? '12px' : '4px')
           .attr('transform', 'rotate(-65)');
 
       const y1Axis = (g: d3.Selection<SVGGElement, unknown, null, undefined>) =>
         g
           .attr('transform', `translate(${margin.left}, 0)`)
           .style('color', 'black')
-          .style('font-size', '1.4rem')
+          .style('font-size', isMobile ? '1.8rem' : '1.4rem')
           .call(d3.axisLeft(y1).ticks(null, 's'))
           .call((g) => g.select('.domain').remove())
           .call((g) =>
@@ -168,15 +170,7 @@ const D3Chart: React.FC = () => {
 
   return (
     <div className="chart-container">
-      <svg
-        ref={ref}
-        style={{
-          height: 500,
-          width: '100%',
-          marginRight: '0px',
-          marginLeft: '0px',
-        }}
-      >
+      <svg ref={ref} viewBox="0 0 800 500">
         <g className="plot-area" />
         <g className="x-axis" />
         <g className="y-axis" />

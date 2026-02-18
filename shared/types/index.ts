@@ -63,6 +63,8 @@ export interface AppContextValue {
   setYear: Dispatch<SetStateAction<number | string>>;
   wordsByYear: WordStats[];
   setWordsByYear: Dispatch<SetStateAction<WordStats[]>>;
+  isLoadingWords: boolean;
+  loadingPhrase: string;
 }
 
 // Component prop types

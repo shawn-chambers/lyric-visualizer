@@ -33,5 +33,16 @@
   },
   "settings": {
     "react": { "version": "detect" }
-  }
+  },
+  "overrides": [
+    {
+      "files": ["webpack.config.js", "webpack.prod.js"],
+      "parserOptions": {
+        "sourceType": "script"
+      },
+      "rules": {
+        "@typescript-eslint/no-require-imports": "off"
+      }
+    }
+  ]
 }

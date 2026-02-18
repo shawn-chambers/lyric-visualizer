@@ -4,157 +4,98 @@ import * as d3 from 'd3';
 import { useAppContext } from '../context/AppContext';
 import { useD3 } from '../hooks/useD3';
 import { colorArray } from '../utils';
-import { WordStats } from '../../shared/types';
 
 const CircleBarChart: React.FC = () => {
   const { wordsByYear } = useAppContext();
 
-  const width = 600,
-    height = 500,
-    chartRadius = height / 2 - 40;
+  const size = 280;
+  const radius = size / 2;
 
   const data = wordsByYear.filter((_el, i) => i < 10);
+  const total = data.reduce((sum, d) => sum + d.nentry, 0);
 
   const ref = useD3(
     (svg) => {
-      if (wordsByYear.length) {
-        const color = d3.scaleOrdinal<number, string>().domain(d3.range(data.length)).range(colorArray);
+      svg.selectAll('*').remove();
 
-        const PI = Math.PI,
-          arcMinRadius = 10,
-          arcPadding = 10,
-          labelPadding = -5,
-          numTicks = 10;
+      if (!wordsByYear.length) return;
 
-        const scale = d3
-          .scaleLinear()
-          .domain([0, (d3.max(data, (d) => d.nentry) || 0) * 1.1])
-          .range([0, 2 * PI]);
+      const pie = d3
+        .pie<(typeof data)[0]>()
+        .value((d) => d.nentry)
+        .sort(null);
 
-        const ticks = scale.ticks(numTicks).slice(0, -1);
+      const arc = d3
+        .arc<d3.PieArcDatum<(typeof data)[0]>>()
+        .innerRadius(0)
+        .outerRadius(radius - 10);
 
-        const numArcs = data.length;
-        const arcWidth = (chartRadius - arcMinRadius - numArcs * arcPadding) / numArcs;
+      const g = svg
+        .attr('viewBox', `0 0 ${size} ${size}`)
+        .append('g')
+        .attr('transform', `translate(${size / 2}, ${size / 2})`);
 
-        const getInnerRadius = (index: number): number => {
-          return arcMinRadius + (numArcs - (index + 1)) * (arcWidth + arcPadding);
-        };
+      const tip = d3
+        .select('body')
+        .append('div')
+        .attr('class', 'pop_up')
+        .style('display', 'none')
+        .style('position', 'absolute')
+        .style('opacity', 0);
 
-        const getOuterRadius = (index: number): number => {
-          return getInnerRadius(index) + arcWidth;
-        };
+      const slices = g
+        .selectAll('.slice')
+        .data(pie(data))
+        .join('path')
+        .attr('class', 'slice')
+        .style('fill', (_d, i) => colorArray[i] ?? colorArray[colorArray.length - 1])
+        .style('opacity', 0);
 
-        const rad2deg = (angle: number): number => {
-          return (angle * 180) / PI;
-        };
-
-        const arc = d3
-          .arc<number>()
-          .innerRadius((_d, i) => getInnerRadius(i))
-          .outerRadius((_d, i) => getOuterRadius(i))
-          .startAngle(0)
-          .endAngle((d) => scale(d));
-
-        const arialAxis = (g: d3.Selection<SVGGElement, unknown, null, undefined>) => {
-          g.selectAll('*').remove();
-
-          const group = g
-            .attr('transform', 'translate(' + width / 2 + ',' + height / 2 + ')')
-            .selectAll('g')
-            .data(ticks)
-            .join('g')
-            .attr('transform', (d) => 'rotate(' + (rad2deg(scale(d)) - 90) + ')');
-          group.append('line').attr('x2', chartRadius);
-          group
-            .append('text')
-            .attr('x', chartRadius + 10)
-            .style('text-anchor', (d) => (scale(d) >= PI && scale(d) < 2 * PI ? 'end' : null))
-            .attr(
-              'transform',
-              (d) => 'rotate(' + (90 - rad2deg(scale(d))) + ',' + (chartRadius + 10) + ',0) translate(0, 5)'
-            )
-            .text((d) => d);
-
-          return group;
-        };
-
-        svg.select<SVGGElement>('.a-axis').call(arialAxis);
-
-        const radialAxis = (g: d3.Selection<SVGGElement, unknown, null, undefined>) =>
-          g
-            .attr('transform', 'translate(' + width / 2 + ',' + height / 2 + ')')
-            .call((g) => g.append('circle').attr('r', getOuterRadius(0) + arcPadding))
-            .call((g) =>
-              g
-                .selectAll('text')
-                .data(data)
-                .join('text')
-                .attr('x', labelPadding)
-                .attr('y', (_d, i) => -getOuterRadius(i) + arcPadding)
-                .style('text-anchor', 'end')
-                .style('font-family', "'Roboto', sans-serif")
-                .style('font-size', '14px')
-                .text((d) => d.word)
-            );
-
-        svg.select<SVGGElement>('.r-axis').call(radialAxis);
-
-        const arcTween = (d: WordStats, i: number) => {
-          const interpolate = d3.interpolate(0, d.nentry);
-          return (t: number) => arc(interpolate(t), i) || '';
-        };
-
-        svg
-          .select('.data')
-          .attr('transform', 'translate(' + width / 2 + ',' + height / 2 + ')')
-          .selectAll('path')
-          .data(data)
-          .join('path')
-          .attr('class', 'arc')
-          .style('fill', (_d, i) => color(i))
-          .transition()
-          .delay((_d, i) => i * 200)
-          .duration(1000)
-          .attrTween('d', arcTween);
-
-        const arcs = svg.selectAll('.arc');
-
-        const popUp = d3.select('body').append('div').attr('class', 'pop_up').style('display', 'none');
-
-        function showTooltip(event: MouseEvent, d: WordStats) {
-          popUp
+      slices
+        .on('mousemove', (event: MouseEvent, d) => {
+          tip
+            .style('display', 'inline-block')
+            .style('opacity', 1)
             .style('left', event.pageX + 10 + 'px')
             .style('top', event.pageY - 25 + 'px')
-            .style('display', 'inline-block')
-            .style('position', 'absolute')
-            .style('opacity', 1)
-            .html(String(d.nentry));
-        }
+            .html(`${d.data.word}: ${d.data.nentry}`);
+        })
+        .on('mouseout', () => {
+          tip.style('opacity', 0).style('display', 'none');
+        });
 
-        function hideTooltip() {
-          popUp.style('opacity', 0);
-        }
-
-        arcs.on('mousemove', (e: MouseEvent, d: unknown) => showTooltip(e, d as WordStats));
-        arcs.on('mouseout', hideTooltip);
-      }
+      slices
+        .transition()
+        .duration(600)
+        .delay((_d, i) => i * 60)
+        .attrTween('d', function (d) {
+          const interpolate = d3.interpolate({ startAngle: d.startAngle, endAngle: d.startAngle }, d);
+          return (t) => arc(interpolate(t)) ?? '';
+        })
+        .style('opacity', 1);
     },
     [wordsByYear]
   );
 
   return (
     <div className="circle-chart">
-      <svg
-        ref={ref}
-        style={{
-          width,
-          height,
-        }}
-      >
-        <g className="data" />
-        <g className="a-axis axis" />
-        <g className="r-axis axis" />
-      </svg>
+      <svg ref={ref} viewBox={`0 0 ${size} ${size}`} />
+      {data.length > 0 && (
+        <div className="circle-chart__legend">
+          {data.map((d, i) => (
+            <div key={d.word} className="circle-chart__legend-item">
+              <span
+                className="circle-chart__legend-swatch"
+                style={{ background: colorArray[i] ?? colorArray[colorArray.length - 1] }}
+              />
+              <span className="circle-chart__legend-word">{d.word}</span>
+              <span className="circle-chart__legend-pct">
+                ({total > 0 ? Math.round((d.nentry / total) * 100) : 0}%)
+              </span>
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 };

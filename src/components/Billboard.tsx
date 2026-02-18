@@ -2,9 +2,13 @@ import React from 'react';
 
 import img from '../assets/photos/records2.jpg';
 
-const Billboard: React.FC = () => {
+interface BillboardProps {
+  billboardRef?: React.RefObject<HTMLDivElement>;
+}
+
+const Billboard: React.FC<BillboardProps> = ({ billboardRef }) => {
   return (
-    <div className="billboard" style={{ backgroundImage: `url(${img})` }}>
+    <div ref={billboardRef} className="billboard" style={{ backgroundImage: `url(${img})` }}>
       <div className="billboard__text">
         <div className="billboard__text--header">
           Say What<span className="mark">?</span>
