@@ -108,6 +108,8 @@ public/*.jpg
 public/*.js
 public/bundle.js.LICENSE.txt
 public/*.gz
+public/index.css
+public/index.css.map
 
 .DS_Store
 
