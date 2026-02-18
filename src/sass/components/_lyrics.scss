@@ -1,10 +1,14 @@
 .lyrics {
   font-family: "Montserrat", sans-serif;
   transition: all 1s ease;
+  overflow: hidden;
+  pointer-events: none;
 
-  @media not all and (min-resolution:.001dpcm){ @supports (-webkit-appearance:none) { 
-    -webkit-transition: none;
-  }}
+  @media not all and (min-resolution: 0.001dpcm) {
+    @supports (-webkit-appearance: none) {
+      -webkit-transition: none;
+    }
+  }
 
   width: 150%;
   position: relative;
@@ -17,5 +21,14 @@
 
   b {
     font-weight: 700;
+  }
+
+  &[style*="opacity: 1"] {
+    pointer-events: auto;
+  }
+
+  @media (max-width: 600px) {
+    width: 100%;
+    right: 0;
   }
 }

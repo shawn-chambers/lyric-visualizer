@@ -1,7 +1,10 @@
+@use "../abstracts/variables" as *;
+
 .chart-container {
   background-color: white;
   padding: 2rem;
-  width: 840px;
+  width: 100%;
+  max-width: 84rem;
   display: flex;
   margin: auto;
   border-radius: 4px;
@@ -9,20 +12,32 @@
   transition: all 2s ease;
   box-shadow: $shadow-1;
 
-  .plot-area {
-    transition: all 2s ease;
-  }
   svg {
+    width: 100%;
+    height: auto;
     transition: all 2s ease;
     fill: $color-secondary;
   }
 
+  .plot-area {
+    transition: all 2s ease;
+  }
+
   .bar {
-    transition: y 2s ease, fill 0.8s ease, height 2s ease;
+    transition:
+      y 2s ease,
+      fill 0.8s ease,
+      height 2s ease;
     cursor: pointer;
 
     &:hover {
       fill: $color-secondary-dark;
     }
+  }
+
+  @media (max-width: 600px) {
+    padding: 0;
+    border-radius: 0;
+    box-shadow: none;
   }
 }
