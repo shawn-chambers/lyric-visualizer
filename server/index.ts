@@ -1,6 +1,6 @@
-import express, { Request, Response, NextFunction } from 'express';
-import dotenv from 'dotenv';
 import compression from 'compression';
+import dotenv from 'dotenv';
+import express, { Request, Response, NextFunction } from 'express';
 import morgan from 'morgan';
 
 import lyricsRouter from './routes/lyricsRoutes';
