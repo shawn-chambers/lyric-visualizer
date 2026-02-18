@@ -8,7 +8,7 @@
     "server:dev": "NODE_ENV=development tsx watch server/index.ts",
     "start:dev": "webpack serve",
     "build:dev": "webpack --watch",
-    "build": "npm run build:server && npm run build:prod",
+    "build": "npm run build:server && sass src/sass/main.scss public/index.css && npm run build:prod",
     "build:prod": "webpack --config webpack.prod.js",
     "build:server": "tsc -p server/tsconfig.json",
     "compile:sass": "sass src/sass/main.scss public/index.css -w",
