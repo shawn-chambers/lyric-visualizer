@@ -9,12 +9,9 @@ export const makeYears = (start: number, end: number): string[] => {
 };
 
 export const formatLyrics = (lyrics: string, keyWord: string): string => {
-  let str = lyrics.split('\n').join('<br>');
-  const regEx1 = new RegExp(keyWord, 'g');
-  str = str.replace(regEx1, '<b>' + keyWord + '</b>');
-  const capitalizedKeyWord = keyWord.charAt(0).toUpperCase() + keyWord.slice(1);
-  const regEx2 = new RegExp(capitalizedKeyWord, 'g');
-  return str.replace(regEx2, '<b>' + capitalizedKeyWord + '</b>');
+  const str = lyrics.split('\n').join('<br>');
+  const regEx = new RegExp(keyWord, 'gi');
+  return str.replace(regEx, (match) => `<b>${match}</b>`);
 };
 
 export const reduceSongsByYear = (data: Song[]): YearCount[] => {
