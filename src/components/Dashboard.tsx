@@ -74,7 +74,7 @@ const Dashboard: React.FC = () => {
         <section className="dashboard__section dashboard__section--word-search">
           <h2 className="dashboard__section-title">Search by Word</h2>
           <p className="dashboard__section-desc">
-            Enter a word to see how many songs each year contained it. Click a bar to see the songs.
+            Enter a word to see how many songs each year contained it. Click to explore each year and how that word was used.
           </p>
           <div className="dashboard__word-exploration">
             <WordSearchBar />
