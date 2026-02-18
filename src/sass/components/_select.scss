@@ -1,3 +1,5 @@
+@use "../abstracts/variables" as *;
+
 .container {
   user-select: none;
   cursor: pointer;
@@ -5,26 +7,26 @@
   text-align: left;
   display: block;
   margin: auto;
-  width: 15rem;
+  width: 100%;
+  max-width: 20rem;
   color: $color-black;
   font-size: 1.4rem;
   font-family: "Roboto", sans-serif;
   max-height: 4rem;
-  
+
   .select,
   button,
   ul {
     padding: 1rem;
     box-shadow: $shadow-1;
   }
-  
+
   .select {
     width: 100%;
     background-color: $color-primary;
-    color: $color-black;
+    color: #757575;
     height: 4rem;
     border-radius: 4px;
-    color: #757575;
     display: flex;
     align-items: center;
     transition: all 1.5s linear;
@@ -36,6 +38,14 @@
     border: none;
     height: 4rem;
     padding: 1rem;
+    border-radius: 0 4px 4px 0;
+    cursor: pointer;
+    transition: all 0.2s ease;
+
+    &:hover {
+      background-color: $color-secondary;
+      color: $color-primary;
+    }
   }
 
   ul {
@@ -55,29 +65,14 @@
 
     li {
       width: 100%;
-      margin: .5rem 0;
+      margin: 0.5rem 0;
       text-align: center;
     }
-
-    &:last-child div {
-      //last in list for border radius
-    }
   }
 
-  button {
-    border-radius: 0 4px 4px 0;
-    cursor: pointer;
-    transition: all 0.2s ease;
-
-    &:hover {
-      background-color: $color-secondary;
-      color: $color-primary;
+  &.selected {
+    .select {
+      border-radius: 4px 4px 0 0;
     }
-  }
-}
-
-.selected {
-  .select {
-    border-radius: 4px 4px 0 0;
   }
 }

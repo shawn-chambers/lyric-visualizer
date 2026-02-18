@@ -1,25 +1,112 @@
+@use "../abstracts/variables" as *;
+
+.dashboard {
+  max-width: 90rem;
+  margin: 0 auto;
+  padding: 0 2rem;
+
+  &__section {
+    margin-bottom: 2.4rem;
+    background: $color-primary;
+    border-radius: 1.2rem;
+    box-shadow: $shadow-1;
+    padding: 3rem;
+    min-height: 55rem;
+
+    &-intro {
+      margin: 0 1rem 3rem 1rem;
+      background: none;
+    }
+
+    &-title {
+      font-family: "Roboto", sans-serif;
+      font-size: 2.4rem;
+      font-weight: 700;
+      text-align: left;
+      margin-bottom: 0.6rem;
+      color: $color-black;
+    }
+
+    &-desc {
+      font-family: "Roboto", sans-serif;
+      font-size: 1.6rem;
+      text-align: left;
+      color: $color-grey;
+      margin: 0 0 2.4rem 0;
+      line-height: 1.6;
+    }
+  }
+
+  &__year-exploration {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+  }
+
+  &__word-exploration {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+  }
+
+  @media (max-width: 600px) {
+    padding: 0 1.5rem;
+
+    &__section {
+      margin-bottom: 1.6rem;
+      padding: 2rem;
+      min-height: 60rem;
+
+      &--word-search {
+        min-height: 45rem;
+      }
+
+      &-title {
+        font-size: 2rem;
+      }
+
+      &-desc {
+        font-size: 1.4rem;
+      }
+    }
+  }
+}
+
+.loading-state {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  min-height: 12rem;
+}
+
 .details {
-  width: fit-content;
-  width: -moz-fit-content;
-  width: -webkit-fit-content;
-  margin: 2rem auto 2rem auto;
+  width: 100%;
+  padding: 0 2rem;
   font-family: "Montserrat", sans-serif;
+  @media (max-width: 600px) {
+    padding: 0;
+  }
 
   .total {
     font-weight: 700;
-    font-size: 5rem;
+    font-size: 3rem;
     text-align: center;
   }
 
   .selection {
-    font-size: 2.5rem;
+    font-size: 2rem;
+    text-align: center;
+
     span {
       position: relative;
-      font-size: 2rem;
+      font-size: 1.6rem;
       font-family: "Montserrat", sans-serif;
       font-style: italic;
       font-weight: 200;
-      bottom: .2rem;
+      bottom: 0.2rem;
     }
   }
 
@@ -27,11 +114,99 @@
     text-decoration: underline;
     text-decoration-color: $color-secondary;
   }
+
+  @media (max-width: 600px) {
+    .total {
+      font-size: 1.75rem;
+      text-align: left;
+    }
+
+    .selection {
+      font-size: 1.4rem;
+      text-align: left;
+
+      span {
+        font-size: 1.2rem;
+        display: block;
+      }
+    }
+  }
 }
 
-.tools-container {
-  margin: 2rem auto 4rem auto;
-  width: fit-content;
-  width: -moz-fit-content;
-  width: -webkit-fit-content;
+.year-chips {
+  &__wrapper {
+    position: relative;
+    width: 100%;
+
+    &::before,
+    &::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 4rem;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.2s ease;
+      z-index: 1;
+    }
+
+    &::before {
+      left: 0;
+      background: linear-gradient(to right, $color-primary, transparent);
+    }
+
+    &::after {
+      right: 0;
+      background: linear-gradient(to left, $color-primary, transparent);
+    }
+
+    &--shadow-left::before {
+      opacity: 1;
+    }
+
+    &--shadow-right::after {
+      opacity: 1;
+    }
+  }
+
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  gap: 0.6rem;
+  width: 100%;
+  padding-bottom: 0.4rem;
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  &__chip {
+    font-family: "Roboto", sans-serif;
+    font-size: 1.3rem;
+    padding: 0.5rem 1rem;
+    border: 1px solid $color-secondary;
+    border-radius: 2rem;
+    background: $color-primary;
+    color: $color-black;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    flex-shrink: 0;
+
+    &:active,
+    &--active {
+      background: $color-secondary;
+      color: $color-primary;
+    }
+  }
+
+  &__count {
+    font-size: 1.1rem;
+    color: $color-grey;
+
+    .year-chips__chip--active & {
+      color: rgba(255, 255, 255, 0.7);
+    }
+  }
 }

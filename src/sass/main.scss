@@ -1,14 +1,16 @@
-@import "abstracts/variables";
+@use "abstracts/variables" as *;
 
-@import "base/base";
-@import "base/typography";
+@use "base/base";
+@use "base/typography";
 
-@import "components/billboard";
-@import "components/chart";
-@import "components/circle-chart";
-@import "components/dashboard";
-@import "components/lyrics";
-@import "components/search";
-@import "components/select";
-@import "components/songs";
-@import "components/tooltip";
+@use "components/billboard";
+@use "components/chart";
+@use "components/circle-chart";
+@use "components/dashboard";
+@use "components/lyrics";
+@use "components/search";
+@use "components/select";
+@use "components/songs";
+@use "components/modal";
+@use "components/sticky-header";
+@use "components/tooltip";
