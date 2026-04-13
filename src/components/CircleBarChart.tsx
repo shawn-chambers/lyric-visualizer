@@ -12,9 +12,7 @@ const CircleBarChart: React.FC = () => {
   const radius = size / 2;
 
   const data = wordsByYear.filter((_el, i) => i < 10);
-  const total = data.reduce((sum, d) => sum + d.nentry, 0);
-
-  const ref = useD3(
+const ref = useD3(
     (svg) => {
       svg.selectAll('*').remove();
 
@@ -90,7 +88,7 @@ const CircleBarChart: React.FC = () => {
               />
               <span className="circle-chart__legend-word">{d.word}</span>
               <span className="circle-chart__legend-pct">
-                ({total > 0 ? Math.round((d.nentry / total) * 100) : 0}%)
+                ({d.nentry})
               </span>
             </div>
           ))}
